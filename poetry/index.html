@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>poetry . salar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style type="text/css">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --red-deep:    #6b1a1a;
+      --red-mid:     #8b2a2a;
+      --red-muted:   #a03a2a;
+      --gold:        #c9a84c;
+      --gold-light:  #e8c87a;
+      --gold-dim:    #7a6030;
+      --green-deep:  #1a3a2a;
+      --green-mid:   #2a5a3a;
+      --cream:       #f5edda;
+      --cream-dim:   #e0d4b8;
+      --ink:         #1c0f0f;
+      --ink-mid:     #3a2020;
+      --parchment:   #f2e8d0;
+    }
+
+    body {
+      /* rug field: deep red with a woven cross-hatch grain */
+      background-color: var(--red-deep);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Crect width='12' height='12' fill='%236b1a1a'/%3E%3Cline x1='0' y1='0' x2='12' y2='12' stroke='%23000000' stroke-width='0.4' opacity='0.12'/%3E%3Cline x1='12' y1='0' x2='0' y2='12' stroke='%23000000' stroke-width='0.4' opacity='0.08'/%3E%3Cline x1='6' y1='0' x2='6' y2='12' stroke='%238b2a2a' stroke-width='0.5' opacity='0.2'/%3E%3Cline x1='0' y1='6' x2='12' y2='6' stroke='%238b2a2a' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+      font-family: "Crimson Text", Georgia, serif;
+      font-size: 14px;
+      color: var(--cream);
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-light); text-decoration: underline; }
+
+    /* ══════════════════════════════════════
+       RUG BORDER FRAME
+    ══════════════════════════════════════ */
+
+    /* The rug border: fixed decorative strips on left and right */
+    .rug-border-left,
+    .rug-border-right {
+      position: fixed;
+      top: 0; bottom: 0;
+      width: 28px;
+      background-color: var(--green-deep);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='28' height='28' fill='%231a3a2a'/%3E%3Cpath d='M14 2 L26 14 L14 26 L2 14 Z' fill='none' stroke='%23c9a84c' stroke-width='1'/%3E%3Ccircle cx='14' cy='14' r='3' fill='%23c9a84c' opacity='0.6'/%3E%3Ccircle cx='14' cy='14' r='1.2' fill='%23c9a84c'/%3E%3Ccircle cx='14' cy='2'  r='1' fill='%23c9a84c' opacity='0.4'/%3E%3Ccircle cx='14' cy='26' r='1' fill='%23c9a84c' opacity='0.4'/%3E%3Ccircle cx='2'  cy='14' r='1' fill='%23c9a84c' opacity='0.4'/%3E%3Ccircle cx='26' cy='14' r='1' fill='%23c9a84c' opacity='0.4'/%3E%3C/svg%3E");
+      z-index: 10;
+    }
+    .rug-border-left  { left: 0;  border-right: 2px solid var(--gold); }
+    .rug-border-right { right: 0; border-left:  2px solid var(--gold); }
+
+    /* inner gold stripe just inside the green border */
+    .rug-border-left::after,
+    .rug-border-right::after {
+      content: '';
+      position: fixed;
+      top: 0; bottom: 0;
+      width: 6px;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--gold) 0px, var(--gold) 6px,
+        var(--red-deep) 6px, var(--red-deep) 12px
+      );
+      opacity: 0.35;
+    }
+    .rug-border-left::after  { left: 28px; }
+    .rug-border-right::after { right: 28px; }
+
+    /* ══════════════════════════════════════
+       PAGE WRAP
+    ══════════════════════════════════════ */
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 16px 60px;
+    }
+
+    /* ══════════════════════════════════════
+       TOP BORDER STRIP (rug header guard)
+    ══════════════════════════════════════ */
+    .top-guard {
+      height: 22px;
+      background: var(--green-deep);
+      border-bottom: 3px solid var(--gold);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Crect width='22' height='22' fill='%231a3a2a'/%3E%3Cpath d='M11 1 L21 11 L11 21 L1 11 Z' fill='none' stroke='%23c9a84c' stroke-width='0.8'/%3E%3Ccircle cx='11' cy='11' r='2' fill='%23c9a84c' opacity='0.7'/%3E%3C/svg%3E");
+      margin-bottom: 0;
+    }
+    .gold-stripe {
+      height: 5px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px, var(--gold) 8px,
+        var(--red-deep) 8px, var(--red-deep) 16px
+      );
+      opacity: 0.5;
+    }
+
+    /* ══════════════════════════════════════
+       BACK LINK
+    ══════════════════════════════════════ */
+    .back-link {
+      display: block;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: var(--gold-dim);
+      padding: 8px 0 6px;
+      text-transform: lowercase;
+    }
+    .back-link:hover { color: var(--gold); text-decoration: none; }
+
+    /* ══════════════════════════════════════
+       BANNER / MEDALLION
+    ══════════════════════════════════════ */
+    .banner {
+      background-color: var(--ink);
+      border: 1px solid var(--gold);
+      border-top: none;
+      padding: 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* paisley/floral background in banner */
+    .banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cellipse cx='40' cy='30' rx='12' ry='20' fill='none' stroke='%23c9a84c' stroke-width='0.6' opacity='0.1'/%3E%3Cellipse cx='40' cy='32' rx='6' ry='10' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.12'/%3E%3Ccircle cx='40' cy='20' r='3' fill='none' stroke='%23c9a84c' stroke-width='0.5' opacity='0.1'/%3E%3Cpath d='M40 10 Q48 20 40 30 Q32 20 40 10' fill='%23c9a84c' opacity='0.04'/%3E%3Cellipse cx='40' cy='60' rx='12' ry='20' fill='none' stroke='%238b2a2a' stroke-width='0.6' opacity='0.15'/%3E%3Ccircle cx='20' cy='40' r='8' fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.08'/%3E%3Ccircle cx='60' cy='40' r='8' fill='none' stroke='%23c9a84c' stroke-width='0.4' opacity='0.08'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* gold top border inside banner */
+    .banner-inner-top {
+      height: 6px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+      opacity: 0.6;
+    }
+
+    .banner-body {
+      padding: 24px 30px 22px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* corner flourishes */
+    .corner {
+      position: absolute;
+      color: var(--gold);
+      opacity: 0.45;
+      font-size: 22px;
+      line-height: 1;
+    }
+    .corner.tl { top: 14px;  left: 14px; }
+    .corner.tr { top: 14px;  right: 14px; transform: scaleX(-1); }
+    .corner.bl { bottom: 10px; left: 14px; transform: scaleY(-1); }
+    .corner.br { bottom: 10px; right: 14px; transform: scale(-1,-1); }
+
+    .banner-persian {
+      font-family: "Amiri", serif;
+      font-size: 36px;
+      color: var(--gold-light);
+      direction: rtl;
+      text-shadow: 0 0 40px rgba(201, 168, 76, 0.35);
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+    }
+    .banner-en {
+      font-family: "Crimson Text", serif;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--gold-dim);
+      letter-spacing: 0.3em;
+      text-transform: lowercase;
+      margin-bottom: 16px;
+    }
+    .banner-note {
+      font-family: "Crimson Text", serif;
+      font-size: 14px;
+      font-style: italic;
+      color: #b09878;
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .banner-inner-bottom {
+      height: 6px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+      opacity: 0.6;
+    }
+
+    /* ══════════════════════════════════════
+       ORNAMENT
+    ══════════════════════════════════════ */
+    .ornament {
+      text-align: center;
+      color: var(--gold);
+      opacity: 0.55;
+      font-size: 15px;
+      margin: 20px 0;
+      letter-spacing: 0.6em;
+    }
+
+    /* ══════════════════════════════════════
+       ERA HEADER
+    ══════════════════════════════════════ */
+    .era-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0 14px;
+    }
+    .era-header::before,
+    .era-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-dim));
+    }
+    .era-header::after {
+      background: linear-gradient(90deg, var(--gold-dim), transparent);
+    }
+    .era-label {
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════
+       POEM CARD
+    ══════════════════════════════════════ */
+    .poem-card {
+      position: relative;
+      background-color: var(--ink);
+      border: 1px solid #3a1818;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    /* left rug-motif accent bar */
+    .poem-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--gold)       0px,  var(--gold)       4px,
+        var(--green-deep) 4px,  var(--green-deep) 8px,
+        var(--red-mid)    8px,  var(--red-mid)    12px,
+        var(--green-deep) 12px, var(--green-deep) 16px
+      );
+    }
+
+    .card-inner {
+      padding: 16px 18px 14px 22px;
+    }
+
+    .poem-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .poet-name {
+      font-family: "Crimson Text", serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+    }
+    .poet-era {
+      font-family: "Courier New", monospace;
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      color: #5a3a2a;
+    }
+
+    /* Persian text */
+    .poem-persian {
+      font-family: "Amiri", serif;
+      font-size: 18px;
+      direction: rtl;
+      text-align: right;
+      color: var(--cream);
+      line-height: 2.2;
+      margin-bottom: 10px;
+    }
+    .poem-persian .h { display: block; }
+
+    /* English text */
+    .poem-english {
+      font-family: "Crimson Text", serif;
+      font-size: 14px;
+      font-style: italic;
+      color: #9a8060;
+      line-height: 1.9;
+      border-left: 2px solid #3a1a1a;
+      padding-left: 12px;
+      margin-bottom: 10px;
+    }
+    .poem-english .l { display: block; }
+
+    /* personal note */
+    .poem-note {
+      border-top: 1px solid #2a1212;
+      padding-top: 9px;
+      margin-top: 4px;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      color: #5a4030;
+      letter-spacing: 0.04em;
+      line-height: 1.7;
+    }
+    .poem-note .note-mark {
+      color: var(--gold-dim);
+      margin-right: 4px;
+    }
+
+    /* card top gold line */
+    .card-topline {
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--gold-dim));
+      opacity: 0.4;
+    }
+
+    /* ── PLACEHOLDER CARD ── */
+    .poem-card.placeholder {
+      opacity: 0.4;
+    }
+    .poem-card.placeholder::before {
+      opacity: 0.3;
+    }
+
+    /* ══════════════════════════════════════
+       BOTTOM GUARD + FOOTER
+    ══════════════════════════════════════ */
+    .bottom-guard {
+      height: 22px;
+      background: var(--green-deep);
+      border-top: 3px solid var(--gold);
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22'%3E%3Crect width='22' height='22' fill='%231a3a2a'/%3E%3Cpath d='M11 1 L21 11 L11 21 L1 11 Z' fill='none' stroke='%23c9a84c' stroke-width='0.8'/%3E%3Ccircle cx='11' cy='11' r='2' fill='%23c9a84c' opacity='0.7'/%3E%3C/svg%3E");
+      margin-top: 30px;
+    }
+
+    .page-footer {
+      text-align: center;
+      padding: 12px 0 6px;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      color: #4a2a1a;
+      letter-spacing: 0.15em;
+      line-height: 1.9;
+    }
+    .page-footer a { color: #6a4a2a; font-size: 10px; }
+    .page-footer a:hover { color: var(--gold-dim); }
+  </style>
+</head>
+<body>
+
+<!-- RUG SIDE BORDERS -->
+<div class="rug-border-left"></div>
+<div class="rug-border-right"></div>
+
+<!-- TOP GUARD -->
+<div class="top-guard"></div>
+<div class="gold-stripe"></div>
+
+<div class="page-wrap">
+
+  <a class="back-link" href="../index.html">← back to the wall</a>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <div class="banner-inner-top"></div>
+    <div class="banner-body">
+      <span class="corner tl">❧</span>
+      <span class="corner tr">❧</span>
+      <span class="corner bl">❧</span>
+      <span class="corner br">❧</span>
+
+      <div class="banner-persian">شعر</div>
+      <div class="banner-en">poetry &nbsp;·&nbsp; a personal collection</div>
+      <div class="banner-note">
+        these are poems that found me at the right moment.<br>
+        some in farsi, some in english, some both.<br>
+        none of them are here to be studied — only felt.
+      </div>
+    </div>
+    <div class="banner-inner-bottom"></div>
+  </div>
+
+  <div class="ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <!-- ══ CLASSICAL ══ -->
+  <div class="era-header">
+    <span class="era-label">classical &nbsp;·&nbsp; شعر کلاسیک</span>
+  </div>
+
+  <!-- HAFEZ -->
+  <div class="poem-card">
+    <div class="card-topline"></div>
+    <div class="card-inner">
+      <div class="poem-meta">
+        <span class="poet-name">Hafez &nbsp;·&nbsp; حافظ</span>
+        <span class="poet-era">14th c. · Shiraz</span>
+      </div>
+      <div class="poem-persian">
+        <span class="h">الا یا أیها الساقی أدر کأساً و ناولها</span>
+        <span class="h">که عشق آسان نمود اول ولی افتاد مشکل‌ها</span>
+      </div>
+      <div class="poem-english">
+        <span class="l">O cupbearer, pass around the wine and offer the cup —</span>
+        <span class="l">for love seemed easy at first, but then came the difficulties.</span>
+      </div>
+      <div class="poem-note">
+        <span class="note-mark">✦</span>
+        the opening of the Divan. every time i read it i think about how the hard part always reveals itself after you've already committed to something. also the word مشکل‌ها lands different when you've had a rough month.
+      </div>
+    </div>
+  </div>
+
+  <!-- RUMI -->
+  <div class="poem-card">
+    <div class="card-topline"></div>
+    <div class="card-inner">
+      <div class="poem-meta">
+        <span class="poet-name">Rumi &nbsp;·&nbsp; مولانا</span>
+        <span class="poet-era">13th c. · Balkh / Konya</span>
+      </div>
+      <div class="poem-persian">
+        <span class="h">بشنو این نی چون شکایت می‌کند</span>
+        <span class="h">از جدایی‌ها حکایت می‌کند</span>
+      </div>
+      <div class="poem-english">
+        <span class="l">Listen to the reed — how it tells a tale of separations,</span>
+        <span class="l">complaining of its longing.</span>
+      </div>
+      <div class="poem-note">
+        <span class="note-mark">✦</span>
+        first two lines of the Masnavi. the reed cut from the reed bed. something about being far from origin keeps pulling me back here — not in a sad way, more like an honest way.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MODERN ══ -->
+  <div class="era-header">
+    <span class="era-label">modern &nbsp;·&nbsp; معاصر</span>
+  </div>
+
+  <!-- FOROUGH -->
+  <div class="poem-card">
+    <div class="card-topline"></div>
+    <div class="card-inner">
+      <div class="poem-meta">
+        <span class="poet-name">Forough Farrokhzad &nbsp;·&nbsp; فروغ فرخزاد</span>
+        <span class="poet-era">20th c. · Tehran</span>
+      </div>
+      <div class="poem-english">
+        <span class="l">I will plant my hands in the garden,</span>
+        <span class="l">I will grow, I know, I know, I know.</span>
+        <span class="l">And swallows will lay their eggs</span>
+        <span class="l">in the hollow of my ink-stained fingers.</span>
+      </div>
+      <div class="poem-note">
+        <span class="note-mark">✦</span>
+        from "Another Birth." she writes the body as landscape and the landscape as body. very grounding when i feel scattered into too many things at once.
+      </div>
+    </div>
+  </div>
+
+  <!-- SHAMLOO -->
+  <div class="poem-card">
+    <div class="card-topline"></div>
+    <div class="card-inner">
+      <div class="poem-meta">
+        <span class="poet-name">Ahmad Shamloo &nbsp;·&nbsp; احمد شاملو</span>
+        <span class="poet-era">20th c. · Tehran</span>
+      </div>
+      <div class="poem-persian">
+        <span class="h">من در این زمان که سرشارم از شعر</span>
+        <span class="h">با تو سخن می‌گویم</span>
+      </div>
+      <div class="poem-english">
+        <span class="l">In this moment, brimming with poetry,</span>
+        <span class="l">I am speaking to you.</span>
+      </div>
+      <div class="poem-note">
+        <span class="note-mark">✦</span>
+        shamloo's free verse always feels like someone speaking directly into your chest. will add more of his work here — this is just a placeholder for now.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ COMING SOON ══ -->
+  <div class="era-header">
+    <span class="era-label">coming &nbsp;·&nbsp; به زودی</span>
+  </div>
+
+  <div class="poem-card placeholder">
+    <div class="card-topline"></div>
+    <div class="card-inner">
+      <div class="poem-meta">
+        <span class="poet-name">Khayyam &nbsp;·&nbsp; خیام</span>
+        <span class="poet-era">11th c. · Nishapur</span>
+      </div>
+      <div class="poem-persian"><span class="h">· · ·</span></div>
+      <div class="poem-note">
+        <span class="note-mark">✦</span>
+        his rubaiyat. the ones about wine that aren't about wine.
+      </div>
+    </div>
+  </div>
+
+  <div class="poem-card placeholder">
+    <div class="card-topline"></div>
+    <div class="card-inner">
+      <div class="poem-meta">
+        <span class="poet-name">Sohrab Sepehri &nbsp;·&nbsp; سهراب سپهری</span>
+        <span class="poet-era">20th c. · Kashan</span>
+      </div>
+      <div class="poem-persian"><span class="h">· · ·</span></div>
+      <div class="poem-note">
+        <span class="note-mark">✦</span>
+        "The Sound of Water's Footsteps." his nature poetry deserves its own section eventually.
+      </div>
+    </div>
+  </div>
+
+  <div class="ornament" style="margin-top:28px;">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+  <div class="bottom-guard"></div>
+
+  <div class="page-footer">
+    <p>salar's poetry collection &nbsp;·&nbsp; always growing</p>
+    <p><a href="../index.html">← back to the wall</a></p>
+    <p style="margin-top:4px; color:#3a2010;">these translations are approximate — poetry resists exact crossing.</p>
+  </div>
+
+</div><!-- /page-wrap -->
+</body>
+</html>
