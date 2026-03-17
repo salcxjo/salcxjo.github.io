@@ -31,7 +31,6 @@
     min-height: 100vh;
   }
 
-  /* Subtle paper texture */
   body::before {
     content: '';
     position: fixed;
@@ -49,7 +48,6 @@
     padding: 0 2rem 4rem;
   }
 
-  /* Header */
   header {
     padding: 3.5rem 0 2rem;
     border-bottom: 1px solid var(--border);
@@ -70,13 +68,9 @@
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 400;
     line-height: 1.1;
-    color: var(--ink);
   }
 
-  h1 em {
-    font-style: italic;
-    color: var(--sepia);
-  }
+  h1 em { font-style: italic; color: var(--sepia); }
 
   .header-meta {
     margin-top: 1rem;
@@ -86,7 +80,6 @@
     letter-spacing: 0.05em;
   }
 
-  /* Controls */
   .controls {
     display: flex;
     flex-wrap: wrap;
@@ -131,7 +124,6 @@
   .filter-group {
     display: flex;
     gap: 0.5rem;
-    flex-wrap: wrap;
     align-items: center;
   }
 
@@ -162,11 +154,7 @@
 
   select:focus { border-color: var(--sepia); }
 
-  .shelf-pills {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
+  .shelf-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
   .pill {
     padding: 0.4rem 0.9rem;
@@ -193,13 +181,7 @@
     white-space: nowrap;
   }
 
-  /* Sort bar */
-  .sort-bar {
-    display: flex;
-    gap: 0.4rem;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
+  .sort-bar { display: flex; gap: 0.4rem; align-items: center; }
 
   .sort-label {
     font-family: 'DM Mono', monospace;
@@ -229,14 +211,12 @@
   .sort-btn.active::after { content: ' ↑'; }
   .sort-btn.active.desc::after { content: ' ↓'; }
 
-  /* Grid */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 1.5rem;
   }
 
-  /* Book card */
   .book-card {
     cursor: pointer;
     animation: fadeIn 0.3s ease both;
@@ -244,7 +224,7 @@
 
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .cover-wrap {
@@ -262,25 +242,40 @@
     transform: translateY(-3px);
   }
 
+  .cover-shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--cream-dark) 25%, #e8dfd0 50%, var(--cream-dark) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
   .cover-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center top;
     display: block;
-    transition: opacity 0.3s;
   }
 
-  /* Overlay */
   .cover-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(20,14,8,0.92) 0%, rgba(20,14,8,0.5) 45%, transparent 100%);
+    background: linear-gradient(to top, rgba(20,14,8,0.93) 0%, rgba(20,14,8,0.55) 45%, transparent 100%);
     opacity: 0;
     transition: opacity 0.22s;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     padding: 0.85rem;
+    z-index: 2;
   }
 
   .book-card:hover .cover-overlay { opacity: 1; }
@@ -298,15 +293,11 @@
     font-family: 'Lora', serif;
     font-style: italic;
     font-size: 0.68rem;
-    color: rgba(255,255,255,0.75);
+    color: rgba(255,255,255,0.78);
     margin-bottom: 0.4rem;
   }
 
-  .overlay-meta {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
+  .overlay-meta { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
   .tag {
     font-family: 'DM Mono', monospace;
@@ -316,37 +307,37 @@
     padding: 0.15rem 0.45rem;
     border-radius: 1px;
     background: rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.88);
   }
 
-  .tag.read { background: rgba(90,122,90,0.6); }
-  .tag.to-read { background: rgba(181,69,27,0.5); }
-  .tag.current { background: rgba(196,154,60,0.6); }
+  .tag.read    { background: rgba(90,122,90,0.65); }
+  .tag.to-read { background: rgba(181,69,27,0.55); }
+  .tag.current { background: rgba(196,154,60,0.65); }
 
-  /* Rating stars */
-  .overlay-rating {
-    font-size: 0.65rem;
-    color: var(--gold);
-    margin-top: 0.3rem;
-    letter-spacing: 0.05em;
-  }
+  .overlay-rating { font-size: 0.65rem; color: var(--gold); margin-top: 0.3rem; }
 
-  /* Fallback cover */
+  /* Fallback covers */
   .cover-fallback {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: linear-gradient(135deg, var(--cream-dark) 0%, #e0d5c0 100%);
     text-align: center;
+  }
+
+  .fallback-spine {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 5px;
+    opacity: 0.4;
   }
 
   .fallback-title {
     font-family: 'Playfair Display', serif;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 600;
     color: var(--ink-light);
     line-height: 1.3;
@@ -356,29 +347,26 @@
   .fallback-author {
     font-family: 'Lora', serif;
     font-style: italic;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     color: var(--sepia);
   }
 
-  .fallback-spine {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: var(--sepia);
-    opacity: 0.3;
-  }
+  .p0 { background: linear-gradient(135deg,#e8ddd0,#d4c5b0); }
+  .p0 .fallback-spine { background: #8b6f4e; }
+  .p1 { background: linear-gradient(135deg,#dde8d8,#c5d4be); }
+  .p1 .fallback-spine { background: #5a7a5a; }
+  .p2 { background: linear-gradient(135deg,#e8d8d0,#d4beb4); }
+  .p2 .fallback-spine { background: #b5451b; }
+  .p3 { background: linear-gradient(135deg,#d8dde8,#b4bec8); }
+  .p3 .fallback-spine { background: #4a5f7a; }
+  .p4 { background: linear-gradient(135deg,#e8e2d0,#d4caa8); }
+  .p4 .fallback-spine { background: #c49a3c; }
 
-  /* Card info below */
-  .card-info {
-    margin-top: 0.6rem;
-  }
+  .card-info { margin-top: 0.6rem; }
 
   .card-title {
     font-family: 'Playfair Display', serif;
     font-size: 0.8rem;
-    font-weight: 400;
     color: var(--ink);
     line-height: 1.3;
     white-space: nowrap;
@@ -397,52 +385,20 @@
     text-overflow: ellipsis;
   }
 
-  /* Empty state */
   .empty-state {
-    grid-column: 1 / -1;
+    grid-column: 1/-1;
     text-align: center;
     padding: 4rem 2rem;
     color: var(--muted);
   }
 
-  .empty-state p {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-  }
+  .empty-state p { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; margin-bottom:0.5rem; }
+  .empty-state small { font-family:'DM Mono',monospace; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; }
 
-  .empty-state small {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* Divider */
-  .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 2rem 0 1.5rem;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
-
-  .section-divider::before, .section-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  @media (max-width: 600px) {
-    .controls { flex-direction: column; align-items: stretch; }
-    .result-count { margin-left: 0; }
-    .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1rem; }
+  @media(max-width:600px) {
+    .controls { flex-direction:column; align-items:stretch; }
+    .result-count { margin-left:0; }
+    .grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:1rem; }
   }
 </style>
 </head>
@@ -451,40 +407,30 @@
   <header>
     <div class="header-eyebrow">Reading Life</div>
     <h1>Books I've <em>Read</em></h1>
-    <div class="header-meta" id="headerMeta">— books across many shelves</div>
+    <div class="header-meta" id="headerMeta">— loading…</div>
   </header>
 
   <div class="controls">
     <div class="search-wrap">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" id="searchInput" placeholder="Search titles, authors…" autocomplete="off">
+      <input type="search" id="searchInput" placeholder="Search titles, authors, genres…" autocomplete="off">
     </div>
-
     <div class="filter-group">
       <span class="filter-label">Author</span>
-      <select id="authorFilter">
-        <option value="">All authors</option>
-      </select>
+      <select id="authorFilter"><option value="">All</option></select>
     </div>
-
     <div class="filter-group">
       <span class="filter-label">Genre</span>
-      <select id="genreFilter">
-        <option value="">All genres</option>
-      </select>
+      <select id="genreFilter"><option value="">All</option></select>
     </div>
-
     <div class="filter-group">
-      <span class="filter-label">Year</span>
-      <select id="yearFilter">
-        <option value="">Any year</option>
-      </select>
+      <span class="filter-label">Decade</span>
+      <select id="yearFilter"><option value="">Any</option></select>
     </div>
-
     <span class="result-count" id="resultCount"></span>
   </div>
 
-  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:0.75rem;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.75rem;">
     <div class="shelf-pills">
       <button class="pill active" data-shelf="all">All</button>
       <button class="pill" data-shelf="read">Read</button>
@@ -496,7 +442,7 @@
       <button class="sort-btn active" data-sort="title">Title</button>
       <button class="sort-btn" data-sort="author">Author</button>
       <button class="sort-btn" data-sort="year">Year</button>
-      <button class="sort-btn" data-sort="rating">My Rating</button>
+      <button class="sort-btn" data-sort="rating">Rating</button>
     </div>
   </div>
 
@@ -505,271 +451,239 @@
 
 <script>
 const books = [
-  { id: 1, title: "The Satanic Verses", author: "Salman Rushdie", year: 1988, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780312270827" },
-  { id: 2, title: "Shame", author: "Salman Rushdie", year: 1983, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780679756279" },
-  { id: 3, title: "Shalimar the Clown", author: "Salman Rushdie", year: 2005, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780679783480" },
-  { id: 4, title: "The Prophet's Hair", author: "Salman Rushdie", year: 1981, rating: 5, shelf: "read", genre: "Short Stories", isbn: "" },
-  { id: 5, title: "Indians on Vacation", author: "Thomas King", year: 2020, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9781443460552" },
-  { id: 6, title: "Medicine River", author: "Thomas King", year: 1990, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780143054351" },
-  { id: 7, title: "The Inconvenient Indian", author: "Thomas King", year: 2012, rating: 5, shelf: "read", genre: "Indigenous / Non-fiction", isbn: "9780385674058" },
-  { id: 8, title: "The Truth About Stories", author: "Thomas King", year: 2003, rating: 5, shelf: "read", genre: "Indigenous / Non-fiction", isbn: "9780816646265" },
-  { id: 9, title: "Green Grass, Running Water", author: "Thomas King", year: 1993, rating: 0, shelf: "currently-reading", genre: "Literary Fiction", isbn: "9780553373684" },
-  { id: 10, title: "Black Berry, Sweet Juice", author: "Lawrence Hill", year: 2001, rating: 4, shelf: "read", genre: "Memoir / Identity", isbn: "9780002000208" },
-  { id: 11, title: "The Serviceberry", author: "Robin Wall Kimmerer", year: 2024, rating: 5, shelf: "read", genre: "Nature Writing", isbn: "9781668072240" },
-  { id: 12, title: "Braiding Sweetgrass", author: "Robin Wall Kimmerer", year: 2013, rating: 5, shelf: "read", genre: "Nature Writing", isbn: "9781571313355" },
-  { id: 13, title: "Gathering Moss", author: "Robin Wall Kimmerer", year: 2003, rating: 0, shelf: "currently-reading", genre: "Nature Writing", isbn: "9780870714993" },
-  { id: 14, title: "The Unconscious Civilization", author: "John Ralston Saul", year: 1995, rating: 4, shelf: "read", genre: "Philosophy / Politics", isbn: "9780684871080" },
-  { id: 15, title: "Notes from Underground", author: "Fyodor Dostoevsky", year: 1864, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780679734529" },
-  { id: 16, title: "White Nights", author: "Fyodor Dostoyevsky", year: 1848, rating: 0, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 17, title: "21 Things You May Not Know About the Indian Act", author: "Bob Joseph", year: 2018, rating: 5, shelf: "read", genre: "Indigenous / Non-fiction", isbn: "9780995266520" },
-  { id: 18, title: "The Stranger", author: "Albert Camus", year: 1942, rating: 5, shelf: "read", genre: "Philosophy / Fiction", isbn: "9780679720201" },
-  { id: 19, title: "The Fall", author: "Albert Camus", year: 1956, rating: 0, shelf: "read", genre: "Philosophy / Fiction", isbn: "9780679720225" },
-  { id: 20, title: "عقاید یک دلقک", author: "Heinrich Böll", year: 1963, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 21, title: "خاطره دخترکان غمگین من", author: "Gabriel García Márquez", year: 2004, rating: 4, shelf: "read", genre: "Literary Fiction", isbn: "9781400095940" },
-  { id: 22, title: "The Tribe of the Esraris", author: "Ahmet Güntan", year: 2003, rating: 4, shelf: "read", genre: "Literary Fiction", isbn: "9786059389761" },
-  { id: 23, title: "Man's Search for Meaning", author: "Viktor Frankl", year: 1946, rating: 5, shelf: "read", genre: "Philosophy / Memoir", isbn: "9780807014295" },
-  { id: 24, title: "Le Petit Prince", author: "Antoine de Saint-Exupéry", year: 1943, rating: 0, shelf: "read", genre: "Classic / Fable", isbn: "9783125971400" },
-  { id: 25, title: "No God but God", author: "Reza Aslan", year: 2005, rating: 4, shelf: "read", genre: "Religion / History", isbn: "9781588365149" },
-  { id: 26, title: "God: A Human History", author: "Reza Aslan", year: 2017, rating: 0, shelf: "read", genre: "Religion / History", isbn: "9780553394733" },
-  { id: 27, title: "Zealot", author: "Reza Aslan", year: 2013, rating: 0, shelf: "read", genre: "Religion / History", isbn: "9781400069224" },
-  { id: 28, title: "An American Martyr in Persia", author: "Reza Aslan", year: 2022, rating: 0, shelf: "read", genre: "History / Biography", isbn: "9781324004479" },
-  { id: 29, title: "The Metamorphosis", author: "Franz Kafka", year: 1915, rating: 0, shelf: "read", genre: "Literary Fiction", isbn: "9780553213690" },
-  { id: 30, title: "Bones of Belonging", author: "Annahid Dashtgard", year: 2023, rating: 5, shelf: "read", genre: "Memoir / Identity", isbn: "9781459750623" },
-  { id: 31, title: "All Our Relations", author: "Tanya Talaga", year: 2018, rating: 5, shelf: "read", genre: "Indigenous / Non-fiction", isbn: "9781487005733" },
-  { id: 32, title: "The Wayfinders", author: "Wade Davis", year: 2009, rating: 5, shelf: "read", genre: "Anthropology / Nature", isbn: "9780887847660" },
-  { id: 33, title: "Too Loud a Solitude", author: "Bohumil Hrabal", year: 1976, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780349102627" },
-  { id: 34, title: "A Complex Coast", author: "David Norwell", year: 2023, rating: 5, shelf: "read", genre: "Adventure / Nature", isbn: "9781772034493" },
-  { id: 35, title: "Zen and the Art of Saving the Planet", author: "Thich Nhat Hanh", year: 2021, rating: 0, shelf: "read", genre: "Spirituality / Environment", isbn: "9780062954831" },
-  { id: 36, title: "Stories from the Magic Canoe of Wa'xaid", author: "Cecil Paul", year: 2019, rating: 0, shelf: "to-read", genre: "Indigenous / Non-fiction", isbn: "9781771602952" },
-  { id: 37, title: "Chroniques de Jérusalem", author: "Guy Delisle", year: 2011, rating: 5, shelf: "read", genre: "Graphic Novel", isbn: "9782756025698" },
-  { id: 38, title: "Ducks: Two Years in the Oil Sands", author: "Kate Beaton", year: 2022, rating: 5, shelf: "read", genre: "Graphic Novel", isbn: "9781770462892" },
-  { id: 39, title: "Les Nourritures terrestres", author: "André Gide", year: 1897, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 40, title: "1984", author: "George Orwell", year: 1948, rating: 5, shelf: "read", genre: "Dystopia", isbn: "9780452284234" },
-  { id: 41, title: "Animal Farm", author: "George Orwell", year: 1945, rating: 0, shelf: "read", genre: "Classic / Allegory", isbn: "9780451526342" },
-  { id: 42, title: "The Catcher in the Rye", author: "J.D. Salinger", year: 1951, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780316769174" },
-  { id: 43, title: "داستان‌های پس از مرگ", author: "J.D. Salinger", year: 1940, rating: 5, shelf: "read", genre: "Short Stories", isbn: "9786007283165" },
-  { id: 44, title: "Kitchen Confidential", author: "Anthony Bourdain", year: 2000, rating: 5, shelf: "read", genre: "Memoir / Food", isbn: "9780060899226" },
-  { id: 45, title: "Medium Raw", author: "Anthony Bourdain", year: 2010, rating: 0, shelf: "read", genre: "Memoir / Food", isbn: "9780061998065" },
-  { id: 46, title: "Martyr!", author: "Kaveh Akbar", year: 2024, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780593537619" },
-  { id: 47, title: "Jonny Appleseed", author: "Joshua Whitehead", year: 2018, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 48, title: "The White Castle", author: "Orhan Pamuk", year: 1985, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9780571164660" },
-  { id: 49, title: "Benim Adım Kırmızı", author: "Orhan Pamuk", year: 1998, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 50, title: "Looking for the Enemy", author: "Bette Dam", year: 2019, rating: 5, shelf: "read", genre: "Journalism / War", isbn: "" },
-  { id: 51, title: "Strong Towns", author: "Charles L. Marohn Jr.", year: 2019, rating: 5, shelf: "read", genre: "Urbanism / Politics", isbn: "9781119564812" },
-  { id: 52, title: "Encampment", author: "Maggie Helwig", year: 2025, rating: 5, shelf: "read", genre: "Social Issues", isbn: "9781552455043" },
-  { id: 53, title: "Everything Is Tuberculosis", author: "John Green", year: 2025, rating: 5, shelf: "read", genre: "History / Science", isbn: "9780525556572" },
-  { id: 54, title: "Train Dreams", author: "Denis Johnson", year: 2002, rating: 3, shelf: "read", genre: "Literary Fiction", isbn: "9781250007650" },
-  { id: 55, title: "The Atheist Muslim", author: "Ali A. Rizvi", year: 2016, rating: 5, shelf: "read", genre: "Religion / Memoir", isbn: "" },
-  { id: 56, title: "مدیر مدرسه", author: "Jalal Al-e Ahmad", year: 1958, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9789645509567" },
-  { id: 57, title: "اورازان", author: "Jalal Al-e Ahmad", year: 1981, rating: 0, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 58, title: "حافظ ناشنیده پند", author: "Iraj Pezeshkzad", year: 2004, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "9789643413743" },
-  { id: 59, title: "دایی‌جان ناپلئون", author: "Iraj Pezeshkzad", year: 1973, rating: 5, shelf: "read", genre: "Literary Fiction", isbn: "" },
-  { id: 60, title: "در ستایش بطالت", author: "Bertrand Russell", year: 1935, rating: 5, shelf: "read", genre: "Philosophy / Essays", isbn: "" },
-  { id: 61, title: "Code Name: Pale Horse", author: "Scott Payne", year: 2025, rating: 4, shelf: "read", genre: "Journalism / True Crime", isbn: "9781668032909" },
-  { id: 62, title: "The Power Broker", author: "Robert A. Caro", year: 1974, rating: 0, shelf: "currently-reading", genre: "Biography / Urbanism", isbn: "9780394720241" },
-  { id: 63, title: "The Greatest: My Own Story", author: "Muhammad Ali", year: 1975, rating: 0, shelf: "currently-reading", genre: "Memoir / Sport", isbn: "9780394462684" },
-  { id: 64, title: "High and Mighty", author: "Keith Bradsher", year: 2002, rating: 0, shelf: "to-read", genre: "Urbanism / Politics", isbn: "9781586481230" },
-  { id: 65, title: "Memed, My Hawk", author: "Yaşar Kemal", year: 1955, rating: 0, shelf: "to-read", genre: "Literary Fiction", isbn: "9781590171394" },
-  { id: 66, title: "Tender Is the Flesh", author: "Agustina Bazterrica", year: 2017, rating: 0, shelf: "to-read", genre: "Literary Fiction", isbn: "" },
-  { id: 67, title: "To Kill a Mockingbird", author: "Harper Lee", year: 1960, rating: 0, shelf: "to-read", genre: "Classic / Literary Fiction", isbn: "" },
-  { id: 68, title: "Brave New World", author: "Aldous Huxley", year: 1932, rating: 0, shelf: "to-read", genre: "Dystopia", isbn: "9780060929879" },
-  { id: 69, title: "2001: A Space Odyssey", author: "Arthur C. Clarke", year: 1968, rating: 0, shelf: "to-read", genre: "Science Fiction", isbn: "" },
-  { id: 70, title: "Betty", author: "Tiffany McDaniel", year: 2020, rating: 0, shelf: "to-read", genre: "Literary Fiction", isbn: "9780525657071" },
-  { id: 71, title: "Suvashun", author: "Simin Daneshvar", year: 1969, rating: 0, shelf: "to-read", genre: "Literary Fiction", isbn: "" },
-  { id: 72, title: "طوبا و معنای شب", author: "Shahrnush Parsipur", year: 1989, rating: 0, shelf: "to-read", genre: "Literary Fiction", isbn: "" },
-  { id: 73, title: "In the Realm of Hungry Ghosts", author: "Gabor Maté", year: 2007, rating: 0, shelf: "to-read", genre: "Medicine / Social Issues", isbn: "9780676977400" },
-  { id: 74, title: "A Fair Country", author: "John Ralston Saul", year: 2008, rating: 0, shelf: "to-read", genre: "Philosophy / Politics", isbn: "9780670068043" },
-  { id: 75, title: "You Better Be Lightning", author: "Andrea Gibson", year: 2021, rating: 0, shelf: "to-read", genre: "Poetry", isbn: "9781943735990" },
-  { id: 76, title: "I Who Have Never Known Men", author: "Jacqueline Harpman", year: 1995, rating: 0, shelf: "to-read", genre: "Literary Fiction", isbn: "9781945492600" },
-  { id: 77, title: "Everything I Know About Love", author: "Dolly Alderton", year: 2018, rating: 0, shelf: "to-read", genre: "Memoir / Essays", isbn: "9780062968784" },
-  { id: 78, title: "Against Intellectual Property", author: "N. Stephan Kinsella", year: 2001, rating: 0, shelf: "currently-reading", genre: "Philosophy / Law", isbn: "9781933550329" },
+  { id:1,  title:"The Satanic Verses",              author:"Salman Rushdie",           year:1988, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780312270827" },
+  { id:2,  title:"Shame",                            author:"Salman Rushdie",           year:1983, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780099428688" },
+  { id:3,  title:"Shalimar the Clown",               author:"Salman Rushdie",           year:2005, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780679783480" },
+  { id:4,  title:"The Prophet's Hair",               author:"Salman Rushdie",           year:1981, rating:5, shelf:"read",              genre:"Short Stories",          isbn:"" },
+  { id:5,  title:"Indians on Vacation",              author:"Thomas King",              year:2020, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9781443460552" },
+  { id:6,  title:"Medicine River",                   author:"Thomas King",              year:1990, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780143054351" },
+  { id:7,  title:"The Inconvenient Indian",          author:"Thomas King",              year:2012, rating:5, shelf:"read",              genre:"Indigenous Non-fiction", isbn:"9780385674058" },
+  { id:8,  title:"The Truth About Stories",          author:"Thomas King",              year:2003, rating:5, shelf:"read",              genre:"Indigenous Non-fiction", isbn:"9780816646265" },
+  { id:9,  title:"Green Grass, Running Water",       author:"Thomas King",              year:1993, rating:0, shelf:"currently-reading", genre:"Literary Fiction",       isbn:"9780553373684" },
+  { id:10, title:"Black Berry, Sweet Juice",         author:"Lawrence Hill",            year:2001, rating:4, shelf:"read",              genre:"Memoir",                 isbn:"9780002000208" },
+  { id:11, title:"The Serviceberry",                 author:"Robin Wall Kimmerer",      year:2024, rating:5, shelf:"read",              genre:"Nature Writing",         isbn:"9781668072240" },
+  { id:12, title:"Braiding Sweetgrass",              author:"Robin Wall Kimmerer",      year:2013, rating:5, shelf:"read",              genre:"Nature Writing",         isbn:"9781571313355" },
+  { id:13, title:"Gathering Moss",                   author:"Robin Wall Kimmerer",      year:2003, rating:0, shelf:"currently-reading", genre:"Nature Writing",         isbn:"9780870714993" },
+  { id:14, title:"The Unconscious Civilization",     author:"John Ralston Saul",        year:1995, rating:4, shelf:"read",              genre:"Philosophy",             isbn:"9780684871080" },
+  { id:15, title:"Notes from Underground",           author:"Fyodor Dostoevsky",        year:1864, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780679734529" },
+  { id:16, title:"White Nights",                    author:"Fyodor Dostoevsky",        year:1848, rating:0, shelf:"read",              genre:"Literary Fiction",       isbn:"9780141396972" },
+  { id:17, title:"21 Things About the Indian Act",   author:"Bob Joseph",               year:2018, rating:5, shelf:"read",              genre:"Indigenous Non-fiction", isbn:"9780995266520" },
+  { id:18, title:"The Stranger",                     author:"Albert Camus",             year:1942, rating:5, shelf:"read",              genre:"Philosophy",             isbn:"9780679720201" },
+  { id:19, title:"The Fall",                         author:"Albert Camus",             year:1956, rating:0, shelf:"read",              genre:"Philosophy",             isbn:"9780679720225" },
+  { id:20, title:"The Clown",                        author:"Heinrich Böll",            year:1963, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780810116078" },
+  { id:21, title:"Memories of My Melancholy Whores", author:"Gabriel García Márquez",   year:2004, rating:4, shelf:"read",              genre:"Literary Fiction",       isbn:"9781400095940" },
+  { id:22, title:"The Tribe of the Esraris",         author:"Ahmet Güntan",             year:2003, rating:4, shelf:"read",              genre:"Literary Fiction",       isbn:"9786059389761" },
+  { id:23, title:"Man's Search for Meaning",         author:"Viktor Frankl",            year:1946, rating:5, shelf:"read",              genre:"Philosophy",             isbn:"9780807014295" },
+  { id:24, title:"Le Petit Prince",                  author:"Antoine de Saint-Exupéry", year:1943, rating:0, shelf:"read",              genre:"Classic",                isbn:"9780156012195" },
+  { id:25, title:"No God but God",                   author:"Reza Aslan",               year:2005, rating:4, shelf:"read",              genre:"Religion & History",     isbn:"9780812971897" },
+  { id:26, title:"God: A Human History",             author:"Reza Aslan",               year:2017, rating:0, shelf:"read",              genre:"Religion & History",     isbn:"9780553394733" },
+  { id:27, title:"Zealot",                           author:"Reza Aslan",               year:2013, rating:0, shelf:"read",              genre:"Religion & History",     isbn:"9781400069224" },
+  { id:28, title:"An American Martyr in Persia",     author:"Reza Aslan",               year:2022, rating:0, shelf:"read",              genre:"History",                isbn:"9781324004479" },
+  { id:29, title:"The Metamorphosis",                author:"Franz Kafka",              year:1915, rating:0, shelf:"read",              genre:"Literary Fiction",       isbn:"9780553213690" },
+  { id:30, title:"Bones of Belonging",               author:"Annahid Dashtgard",        year:2023, rating:5, shelf:"read",              genre:"Memoir",                 isbn:"9781459750623" },
+  { id:31, title:"All Our Relations",                author:"Tanya Talaga",             year:2018, rating:5, shelf:"read",              genre:"Indigenous Non-fiction", isbn:"9781487005733" },
+  { id:32, title:"The Wayfinders",                   author:"Wade Davis",               year:2009, rating:5, shelf:"read",              genre:"Anthropology",           isbn:"9780887847660" },
+  { id:33, title:"Too Loud a Solitude",              author:"Bohumil Hrabal",           year:1976, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780156904131" },
+  { id:34, title:"A Complex Coast",                  author:"David Norwell",            year:2023, rating:5, shelf:"read",              genre:"Adventure",              isbn:"9781772034493" },
+  { id:35, title:"Zen and the Art of Saving the Planet", author:"Thich Nhat Hanh",     year:2021, rating:0, shelf:"read",              genre:"Spirituality",           isbn:"9780062954831" },
+  { id:36, title:"Stories from the Magic Canoe",    author:"Cecil Paul",               year:2019, rating:0, shelf:"to-read",           genre:"Indigenous Non-fiction", isbn:"9781771602952" },
+  { id:37, title:"Chroniques de Jérusalem",          author:"Guy Delisle",              year:2011, rating:5, shelf:"read",              genre:"Graphic Novel",          isbn:"9781770461390" },
+  { id:38, title:"Ducks: Two Years in the Oil Sands",author:"Kate Beaton",             year:2022, rating:5, shelf:"read",              genre:"Graphic Novel",          isbn:"9781770462892" },
+  { id:39, title:"Fruits of the Earth",              author:"André Gide",              year:1897, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780394700427" },
+  { id:40, title:"1984",                             author:"George Orwell",            year:1948, rating:5, shelf:"read",              genre:"Dystopia",               isbn:"9780452284234" },
+  { id:41, title:"Animal Farm",                      author:"George Orwell",            year:1945, rating:0, shelf:"read",              genre:"Classic",                isbn:"9780451526342" },
+  { id:42, title:"The Catcher in the Rye",           author:"J.D. Salinger",            year:1951, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780316769174" },
+  { id:43, title:"Nine Stories",                     author:"J.D. Salinger",            year:1953, rating:5, shelf:"read",              genre:"Short Stories",          isbn:"9780316769501" },
+  { id:44, title:"Kitchen Confidential",             author:"Anthony Bourdain",         year:2000, rating:5, shelf:"read",              genre:"Memoir",                 isbn:"9780060899226" },
+  { id:45, title:"Medium Raw",                       author:"Anthony Bourdain",         year:2010, rating:0, shelf:"read",              genre:"Memoir",                 isbn:"9780061998065" },
+  { id:46, title:"Martyr!",                          author:"Kaveh Akbar",              year:2024, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780593537619" },
+  { id:47, title:"Jonny Appleseed",                  author:"Joshua Whitehead",         year:2018, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9781551527390" },
+  { id:48, title:"The White Castle",                 author:"Orhan Pamuk",              year:1985, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780571164660" },
+  { id:49, title:"My Name Is Red",                   author:"Orhan Pamuk",              year:1998, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9780375706851" },
+  { id:50, title:"Looking for the Enemy",            author:"Bette Dam",                year:2019, rating:5, shelf:"read",              genre:"Journalism",             isbn:"9780063001596" },
+  { id:51, title:"Strong Towns",                     author:"Charles L. Marohn Jr.",    year:2019, rating:5, shelf:"read",              genre:"Urbanism",               isbn:"9781119564812" },
+  { id:52, title:"Encampment",                       author:"Maggie Helwig",            year:2025, rating:5, shelf:"read",              genre:"Social Issues",          isbn:"9781552455043" },
+  { id:53, title:"Everything Is Tuberculosis",       author:"John Green",               year:2025, rating:5, shelf:"read",              genre:"History",                isbn:"9780525556572" },
+  { id:54, title:"Train Dreams",                     author:"Denis Johnson",            year:2002, rating:3, shelf:"read",              genre:"Literary Fiction",       isbn:"9781250007650" },
+  { id:55, title:"The Atheist Muslim",               author:"Ali A. Rizvi",             year:2016, rating:5, shelf:"read",              genre:"Memoir",                 isbn:"9781250091970" },
+  { id:56, title:"The School Principal",             author:"Jalal Al-e Ahmad",         year:1958, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"" },
+  { id:57, title:"Orazan",                           author:"Jalal Al-e Ahmad",         year:1981, rating:0, shelf:"read",              genre:"Literary Fiction",       isbn:"" },
+  { id:58, title:"Hafez Nashnide Pand",              author:"Iraj Pezeshkzad",          year:2004, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"" },
+  { id:59, title:"My Uncle Napoleon",                author:"Iraj Pezeshkzad",          year:1973, rating:5, shelf:"read",              genre:"Literary Fiction",       isbn:"9781933823522" },
+  { id:60, title:"In Praise of Idleness",            author:"Bertrand Russell",         year:1935, rating:5, shelf:"read",              genre:"Philosophy",             isbn:"9780415325066" },
+  { id:61, title:"Code Name: Pale Horse",            author:"Scott Payne",              year:2025, rating:4, shelf:"read",              genre:"Journalism",             isbn:"9781668032909" },
+  { id:62, title:"The Power Broker",                 author:"Robert A. Caro",           year:1974, rating:0, shelf:"currently-reading", genre:"Biography",              isbn:"9780394720241" },
+  { id:63, title:"The Greatest: My Own Story",       author:"Muhammad Ali",             year:1975, rating:0, shelf:"currently-reading", genre:"Memoir",                 isbn:"9780394462684" },
+  { id:64, title:"High and Mighty",                  author:"Keith Bradsher",           year:2002, rating:0, shelf:"to-read",           genre:"Urbanism",               isbn:"9781586481230" },
+  { id:65, title:"Memed, My Hawk",                   author:"Yaşar Kemal",              year:1955, rating:0, shelf:"to-read",           genre:"Literary Fiction",       isbn:"9781590171394" },
+  { id:66, title:"Tender Is the Flesh",              author:"Agustina Bazterrica",      year:2017, rating:0, shelf:"to-read",           genre:"Literary Fiction",       isbn:"9781250234209" },
+  { id:67, title:"To Kill a Mockingbird",            author:"Harper Lee",               year:1960, rating:0, shelf:"to-read",           genre:"Classic",                isbn:"9780061935466" },
+  { id:68, title:"Brave New World",                  author:"Aldous Huxley",            year:1932, rating:0, shelf:"to-read",           genre:"Dystopia",               isbn:"9780060929879" },
+  { id:69, title:"2001: A Space Odyssey",            author:"Arthur C. Clarke",         year:1968, rating:0, shelf:"to-read",           genre:"Science Fiction",        isbn:"9780451457998" },
+  { id:70, title:"Betty",                            author:"Tiffany McDaniel",         year:2020, rating:0, shelf:"to-read",           genre:"Literary Fiction",       isbn:"9780525657071" },
+  { id:71, title:"Savushun",                         author:"Simin Daneshvar",          year:1969, rating:0, shelf:"to-read",           genre:"Literary Fiction",       isbn:"9780934211239" },
+  { id:72, title:"Touba and the Meaning of Night",   author:"Shahrnush Parsipur",       year:1989, rating:0, shelf:"to-read",           genre:"Literary Fiction",       isbn:"9781933823751" },
+  { id:73, title:"In the Realm of Hungry Ghosts",    author:"Gabor Maté",               year:2007, rating:0, shelf:"to-read",           genre:"Medicine",               isbn:"9780676977400" },
+  { id:74, title:"A Fair Country",                   author:"John Ralston Saul",        year:2008, rating:0, shelf:"to-read",           genre:"Philosophy",             isbn:"9780670068043" },
+  { id:75, title:"You Better Be Lightning",          author:"Andrea Gibson",            year:2021, rating:0, shelf:"to-read",           genre:"Poetry",                 isbn:"9781943735990" },
+  { id:76, title:"I Who Have Never Known Men",       author:"Jacqueline Harpman",       year:1995, rating:0, shelf:"to-read",           genre:"Literary Fiction",       isbn:"9781945492600" },
+  { id:77, title:"Everything I Know About Love",     author:"Dolly Alderton",           year:2018, rating:0, shelf:"to-read",           genre:"Memoir",                 isbn:"9780062968784" },
+  { id:78, title:"Against Intellectual Property",    author:"N. Stephan Kinsella",      year:2001, rating:0, shelf:"currently-reading", genre:"Philosophy",             isbn:"9781933550329" },
 ];
 
-// Cover image fetcher using Open Library
-function getCoverUrl(book) {
-  if (book.isbn) {
-    return `https://covers.openlibrary.org/b/isbn/${book.isbn}-M.jpg`;
+// In-memory cover cache
+const coverCache = {};
+
+async function fetchCover(book) {
+  if (coverCache[book.id] !== undefined) return coverCache[book.id];
+
+  const queries = [];
+  if (book.isbn) queries.push(`isbn:${book.isbn}`);
+  // Also try by title+author as fallback
+  const safeTitle = book.title.replace(/[^a-zA-Z0-9 ]/g, ' ').trim();
+  const safeAuthor = book.author.split(' ').slice(-1)[0]; // last name only
+  queries.push(`intitle:${encodeURIComponent(safeTitle)}+inauthor:${encodeURIComponent(safeAuthor)}`);
+
+  for (const q of queries) {
+    try {
+      const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=1&fields=items(volumeInfo/imageLinks)`);
+      if (!res.ok) continue;
+      const data = await res.json();
+      const links = data?.items?.[0]?.volumeInfo?.imageLinks;
+      if (links) {
+        let url = links.thumbnail || links.smallThumbnail || '';
+        // Upgrade to https and request slightly larger zoom
+        url = url.replace('http://', 'https://').replace('zoom=1', 'zoom=2');
+        if (url) { coverCache[book.id] = url; return url; }
+      }
+    } catch(e) { /* try next */ }
   }
-  return null;
+
+  coverCache[book.id] = 'none';
+  return 'none';
 }
 
 // State
-let currentShelf = 'all';
-let currentSort = 'title';
-let sortDesc = false;
-let activeFilters = { author: '', genre: '', year: '' };
+let currentShelf = 'all', currentSort = 'title', sortDesc = false;
+let activeFilters = { author:'', genre:'', year:'' };
 let searchQuery = '';
 
-// Populate filters
 function populateFilters() {
-  const authors = [...new Set(books.map(b => b.author))].sort();
-  const genres = [...new Set(books.map(b => b.genre))].sort();
-  const years = [...new Set(books.filter(b => b.year).map(b => Math.floor(b.year / 10) * 10))].sort((a,b) => b-a);
-
-  const authorSel = document.getElementById('authorFilter');
-  authors.forEach(a => {
-    const opt = document.createElement('option');
-    opt.value = a; opt.textContent = a;
-    authorSel.appendChild(opt);
-  });
-
-  const genreSel = document.getElementById('genreFilter');
-  genres.forEach(g => {
-    const opt = document.createElement('option');
-    opt.value = g; opt.textContent = g;
-    genreSel.appendChild(opt);
-  });
-
-  const yearSel = document.getElementById('yearFilter');
-  years.forEach(y => {
-    const opt = document.createElement('option');
-    opt.value = y; opt.textContent = `${y}s`;
-    yearSel.appendChild(opt);
-  });
+  const add = (sel, vals) => vals.forEach(v => { const o = document.createElement('option'); o.value=v; o.textContent=v; document.getElementById(sel).appendChild(o); });
+  add('authorFilter', [...new Set(books.map(b=>b.author))].sort());
+  add('genreFilter',  [...new Set(books.map(b=>b.genre))].sort());
+  const decades = [...new Set(books.filter(b=>b.year).map(b=>Math.floor(b.year/10)*10))].sort((a,b)=>b-a);
+  decades.forEach(d => { const o=document.createElement('option'); o.value=d; o.textContent=`${d}s`; document.getElementById('yearFilter').appendChild(o); });
 }
 
 function getFiltered() {
-  let result = [...books];
-
-  if (currentShelf !== 'all') {
-    result = result.filter(b => b.shelf === currentShelf);
-  }
-  if (searchQuery) {
-    const q = searchQuery.toLowerCase();
-    result = result.filter(b =>
-      b.title.toLowerCase().includes(q) ||
-      b.author.toLowerCase().includes(q) ||
-      b.genre.toLowerCase().includes(q)
-    );
-  }
-  if (activeFilters.author) result = result.filter(b => b.author === activeFilters.author);
-  if (activeFilters.genre) result = result.filter(b => b.genre === activeFilters.genre);
-  if (activeFilters.year) result = result.filter(b => Math.floor(b.year / 10) * 10 === parseInt(activeFilters.year));
-
-  result.sort((a, b) => {
-    let av, bv;
-    if (currentSort === 'title') { av = a.title; bv = b.title; }
-    else if (currentSort === 'author') { av = a.author; bv = b.author; }
-    else if (currentSort === 'year') { av = a.year || 0; bv = b.year || 0; }
-    else if (currentSort === 'rating') { av = a.rating; bv = b.rating; }
-    if (typeof av === 'string') return sortDesc ? bv.localeCompare(av) : av.localeCompare(bv);
-    return sortDesc ? bv - av : av - bv;
+  let r = [...books];
+  if (currentShelf !== 'all') r = r.filter(b => b.shelf === currentShelf);
+  if (searchQuery) { const q=searchQuery.toLowerCase(); r = r.filter(b => b.title.toLowerCase().includes(q)||b.author.toLowerCase().includes(q)||b.genre.toLowerCase().includes(q)); }
+  if (activeFilters.author) r = r.filter(b => b.author === activeFilters.author);
+  if (activeFilters.genre)  r = r.filter(b => b.genre  === activeFilters.genre);
+  if (activeFilters.year)   r = r.filter(b => Math.floor(b.year/10)*10 === +activeFilters.year);
+  r.sort((a,b) => {
+    let av,bv;
+    if (currentSort==='title')  {av=a.title;bv=b.title;}
+    else if (currentSort==='author') {av=a.author;bv=b.author;}
+    else if (currentSort==='year')   {av=a.year||0;bv=b.year||0;}
+    else {av=a.rating;bv=b.rating;}
+    if (typeof av==='string') return sortDesc?bv.localeCompare(av):av.localeCompare(bv);
+    return sortDesc?bv-av:av-bv;
   });
-
-  return result;
+  return r;
 }
 
-function shelfClass(shelf) {
-  if (shelf === 'read') return 'read';
-  if (shelf === 'to-read') return 'to-read';
-  if (shelf === 'currently-reading') return 'current';
-  return '';
+const shelfClass = s => s==='read'?'read':s==='to-read'?'to-read':s==='currently-reading'?'current':'';
+const shelfLabel = s => s==='read'?'Read':s==='to-read'?'To Read':s==='currently-reading'?'Reading':'';
+const stars = n => n ? '★'.repeat(n)+'☆'.repeat(5-n) : '';
+
+function makeFallback(book) {
+  const p = book.id % 5;
+  return `<div class="cover-fallback p${p}">
+    <div class="fallback-spine"></div>
+    <div class="fallback-title">${book.title}</div>
+    <div class="fallback-author">${book.author}</div>
+  </div>`;
 }
 
-function shelfLabel(shelf) {
-  if (shelf === 'read') return 'Read';
-  if (shelf === 'to-read') return 'To Read';
-  if (shelf === 'currently-reading') return 'Reading';
-  return '';
-}
-
-function stars(n) {
-  if (!n) return '';
-  return '★'.repeat(n) + '☆'.repeat(5 - n);
-}
-
-function renderGrid() {
+async function renderGrid() {
   const filtered = getFiltered();
   const grid = document.getElementById('bookGrid');
-  const total = books.filter(b => b.shelf === 'read').length;
+  const readN = books.filter(b=>b.shelf==='read').length;
+  document.getElementById('resultCount').textContent = `${filtered.length} book${filtered.length!==1?'s':''}`;
+  document.getElementById('headerMeta').textContent = `— ${readN} read · ${books.filter(b=>b.shelf==='currently-reading').length} in progress · ${books.filter(b=>b.shelf==='to-read').length} queued`;
 
-  document.getElementById('resultCount').textContent =
-    `${filtered.length} book${filtered.length !== 1 ? 's' : ''}`;
-  document.getElementById('headerMeta').textContent =
-    `— ${total} books read · ${books.filter(b => b.shelf === 'currently-reading').length} in progress · ${books.filter(b => b.shelf === 'to-read').length} queued`;
-
-  if (filtered.length === 0) {
+  if (!filtered.length) {
     grid.innerHTML = `<div class="empty-state"><p>No books found.</p><small>Try adjusting your filters</small></div>`;
     return;
   }
 
-  grid.innerHTML = filtered.map((book, i) => {
-    const coverUrl = getCoverUrl(book);
-    const delay = Math.min(i * 20, 300);
-    return `
-    <div class="book-card" style="animation-delay:${delay}ms">
-      <div class="cover-wrap">
-        ${coverUrl
-          ? `<img class="cover-img" src="${coverUrl}" alt="${book.title}"
-               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-               loading="lazy">
-             <div class="cover-fallback" style="display:none">
-               <div class="fallback-spine"></div>
-               <div class="fallback-title">${book.title}</div>
-               <div class="fallback-author">${book.author}</div>
-             </div>`
-          : `<div class="cover-fallback">
-               <div class="fallback-spine"></div>
-               <div class="fallback-title">${book.title}</div>
-               <div class="fallback-author">${book.author}</div>
-             </div>`
-        }
+  // Render immediately with shimmer
+  grid.innerHTML = filtered.map((book, i) => `
+    <div class="book-card" style="animation-delay:${Math.min(i*15,260)}ms">
+      <div class="cover-wrap" id="wrap-${book.id}">
+        <div class="cover-shimmer" id="shimmer-${book.id}"></div>
         <div class="cover-overlay">
           <div class="overlay-title">${book.title}</div>
           <div class="overlay-author">${book.author}</div>
           <div class="overlay-meta">
             <span class="tag ${shelfClass(book.shelf)}">${shelfLabel(book.shelf)}</span>
-            <span class="tag">${book.year || '—'}</span>
-            <span class="tag">${book.genre.split('/')[0].trim()}</span>
+            <span class="tag">${book.year||'—'}</span>
+            <span class="tag">${book.genre.split(' ')[0]}</span>
           </div>
-          ${book.rating ? `<div class="overlay-rating">${stars(book.rating)}</div>` : ''}
+          ${book.rating?`<div class="overlay-rating">${stars(book.rating)}</div>`:''}
         </div>
       </div>
       <div class="card-info">
         <div class="card-title">${book.title}</div>
         <div class="card-author">${book.author}</div>
       </div>
-    </div>`;
-  }).join('');
+    </div>`).join('');
+
+  // Fetch covers in parallel batches
+  const BATCH = 5;
+  for (let i = 0; i < filtered.length; i += BATCH) {
+    await Promise.all(filtered.slice(i, i+BATCH).map(async book => {
+      const url = await fetchCover(book);
+      const shimmer = document.getElementById(`shimmer-${book.id}`);
+      const wrap    = document.getElementById(`wrap-${book.id}`);
+      if (!shimmer || !wrap) return;
+      shimmer.remove();
+      if (url && url !== 'none') {
+        const img = document.createElement('img');
+        img.className = 'cover-img';
+        img.alt = book.title;
+        img.loading = 'lazy';
+        img.onerror = () => { img.remove(); wrap.insertAdjacentHTML('afterbegin', makeFallback(book)); };
+        wrap.insertAdjacentElement('afterbegin', img);
+        img.src = url;
+      } else {
+        wrap.insertAdjacentHTML('afterbegin', makeFallback(book));
+      }
+    }));
+    if (i + BATCH < filtered.length) await new Promise(r => setTimeout(r, 100));
+  }
 }
 
-// Events
-document.getElementById('searchInput').addEventListener('input', e => {
-  searchQuery = e.target.value.trim();
+// Wire up events
+document.getElementById('searchInput').addEventListener('input', e => { searchQuery=e.target.value.trim(); renderGrid(); });
+
+document.querySelectorAll('.pill').forEach(p => p.addEventListener('click', () => {
+  document.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active'); currentShelf=p.dataset.shelf; renderGrid();
+}));
+
+document.querySelectorAll('.sort-btn').forEach(btn => btn.addEventListener('click', () => {
+  if (currentSort===btn.dataset.sort) { sortDesc=!sortDesc; btn.classList.toggle('desc',sortDesc); }
+  else { document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active','desc')); currentSort=btn.dataset.sort; sortDesc=false; btn.classList.add('active'); }
   renderGrid();
-});
+}));
 
-document.querySelectorAll('.pill').forEach(pill => {
-  pill.addEventListener('click', () => {
-    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
-    pill.classList.add('active');
-    currentShelf = pill.dataset.shelf;
-    renderGrid();
-  });
-});
-
-document.querySelectorAll('.sort-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if (currentSort === btn.dataset.sort) {
-      sortDesc = !sortDesc;
-      btn.classList.toggle('desc', sortDesc);
-    } else {
-      document.querySelectorAll('.sort-btn').forEach(b => { b.classList.remove('active','desc'); });
-      currentSort = btn.dataset.sort;
-      sortDesc = false;
-      btn.classList.add('active');
-    }
-    renderGrid();
-  });
-});
-
-['authorFilter','genreFilter','yearFilter'].forEach(id => {
-  document.getElementById(id).addEventListener('change', e => {
-    const key = id.replace('Filter','');
-    activeFilters[key] = e.target.value;
-    renderGrid();
-  });
-});
+['authorFilter','genreFilter','yearFilter'].forEach(id => document.getElementById(id).addEventListener('change', e => {
+  activeFilters[id.replace('Filter','')]=e.target.value; renderGrid();
+}));
 
 populateFilters();
 renderGrid();
