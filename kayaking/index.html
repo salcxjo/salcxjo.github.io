@@ -1,0 +1,480 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>kayaking . salar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&family=Abril+Fatface&display=swap" rel="stylesheet">
+
+  <style type="text/css">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --fog:        #d6d0c4;
+      --stone:      #a89f8c;
+      --bark:       #5c4a35;
+      --deep:       #2a3328;
+      --tide:       #3d5c4a;
+      --salt:       #f0ece3;
+      --ink:        #1c1912;
+      --ink-soft:   #4a4438;
+      --water:      #6b8f8a;
+      --dusk:       #7a8c6e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep);
+      color: var(--salt);
+      font-family: 'Lora', Georgia, serif;
+      min-height: 100vh;
+      /* subtle linen grain */
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+
+    a { color: var(--stone); text-decoration: none; }
+    a:hover { color: var(--fog); }
+
+    /* ── BACK ── */
+    .back {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      padding: 28px 40px 0;
+      opacity: 0.7;
+    }
+    .back:hover { opacity: 1; color: var(--fog); }
+
+    /* ── MASTHEAD ── */
+    .masthead {
+      padding: 40px 40px 0;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .masthead-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 14px;
+    }
+
+    .masthead-title {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(52px, 9vw, 90px);
+      color: var(--salt);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+    }
+
+    .masthead-sub {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--stone);
+      margin-top: 20px;
+      line-height: 1.7;
+      max-width: 480px;
+      border-left: 2px solid var(--tide);
+      padding-left: 18px;
+    }
+
+    /* ── DIVIDER ── */
+    .section-rule {
+      max-width: 820px;
+      margin: 50px auto 0;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .rule-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--tide);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .rule-line {
+      flex: 1;
+      height: 1px;
+      background: var(--tide);
+      opacity: 0.4;
+    }
+    .rule-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--stone);
+      opacity: 0.6;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── TRIP HEADER ── */
+    .trip-header {
+      max-width: 820px;
+      margin: 28px auto 0;
+      padding: 0 40px;
+    }
+    .trip-name {
+      font-family: 'Abril Fatface', serif;
+      font-size: clamp(24px, 4vw, 36px);
+      color: var(--salt);
+      line-height: 1.1;
+    }
+    .trip-where {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--water);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .trip-desc {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      color: var(--stone);
+      line-height: 1.8;
+      margin-top: 14px;
+      max-width: 540px;
+      font-style: italic;
+    }
+
+    /* ── FIELD NOTES GRID ── */
+    .notes-grid {
+      max-width: 820px;
+      margin: 32px auto 0;
+      padding: 0 40px;
+      display: grid;
+      gap: 6px;
+    }
+
+    /* layout variants */
+    .notes-grid.layout-nova {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .notes-grid.layout-clay {
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: auto auto;
+    }
+
+    /* ── NOTE CARD ── */
+    .note {
+      position: relative;
+      overflow: hidden;
+      background: var(--bark);
+    }
+
+    /* photo cards */
+    .note-photo {
+      position: relative;
+    }
+    .note-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.82) brightness(0.88);
+      transition: filter 0.4s ease;
+    }
+    .note-photo:hover img {
+      filter: saturate(0.95) brightness(0.96);
+    }
+
+    /* caption overlay */
+    .note-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 32px 18px 16px;
+      background: linear-gradient(to top, rgba(26,25,18,0.88) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .note-photo:hover .note-caption { opacity: 1; }
+
+    .caption-text {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--fog);
+      line-height: 1.6;
+    }
+    .caption-coord {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      color: var(--stone);
+      margin-top: 5px;
+      text-transform: uppercase;
+    }
+
+    /* text-only note card */
+    .note-text {
+      background: #1e2720;
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 180px;
+    }
+    .note-text .field-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--tide);
+      margin-bottom: 12px;
+    }
+    .note-text .field-body {
+      font-family: 'Lora', serif;
+      font-size: 14px;
+      color: var(--fog);
+      line-height: 1.85;
+    }
+    .note-text .field-body em {
+      color: var(--salt);
+      font-style: italic;
+    }
+
+    /* span helpers */
+    .span-full  { grid-column: 1 / -1; }
+    .span-left  { grid-column: 1 / 2; }
+    .span-right { grid-column: 2 / 3; }
+
+    /* fixed heights for visual rhythm */
+    .h-tall   { height: 440px; }
+    .h-mid    { height: 300px; }
+    .h-short  { height: 220px; }
+    .h-auto   { height: auto; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      max-width: 820px;
+      margin: 60px auto 0;
+      padding: 28px 40px 48px;
+      border-top: 1px solid rgba(61,92,74,0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-note {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 13px;
+      color: var(--stone);
+      opacity: 0.7;
+    }
+    .footer-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--stone);
+    }
+    .footer-back:hover { color: var(--fog); }
+
+    /* ── WATER SEPARATOR ── */
+    .water-sep {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--water), var(--tide), transparent);
+      opacity: 0.25;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .back { padding: 20px 20px 0; }
+      .masthead { padding: 28px 20px 0; }
+      .section-rule, .trip-header, .notes-grid, .page-footer { padding-left: 20px; padding-right: 20px; }
+      .notes-grid.layout-nova,
+      .notes-grid.layout-clay { grid-template-columns: 1fr; }
+      .h-tall { height: 280px; }
+      .h-mid  { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="../index.html">&#8592; back to the wall</a>
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-eyebrow">Routes &nbsp;&middot;&nbsp; Water &nbsp;&middot;&nbsp; Silence</div>
+    <div class="masthead-title">Kayaking</div>
+    <p class="masthead-sub">
+      Fourteen days on water, twice. The kind of time that makes the rest of life feel a little less urgent.
+    </p>
+  </div>
+
+  <!-- ════════════════════════════════════
+       TRIP 1 — NOVA SCOTIA
+  ════════════════════════════════════ -->
+
+  <div class="section-rule">
+    <span class="rule-label">Trip I</span>
+    <div class="rule-line"></div>
+    <span class="rule-meta">14 days &nbsp;·&nbsp; ~2022</span>
+  </div>
+
+  <div class="trip-header">
+    <div class="trip-name">Dublin Bay &amp;<br>Ironbound Island</div>
+    <div class="trip-where">Nova Scotia &nbsp;&middot;&nbsp; Atlantic Coast</div>
+    <p class="trip-desc">
+      Launching from Dublin Bay, paddling the rugged Atlantic coast around Ironbound Island
+      and a scatter of smaller ones. Fog, swells, spruce shoreline, the particular silence of open ocean camping.
+    </p>
+  </div>
+
+  <!-- Nova Scotia notes — no photos yet, just text cards as placeholders -->
+  <div class="notes-grid layout-nova">
+
+    <div class="note note-text span-full">
+      <div class="field-label">Day 1 &nbsp;&middot;&nbsp; Dublin Bay launch</div>
+      <div class="field-body">
+        The first day is always strange. You're still thinking about what you forgot to pack.
+        By evening you've stopped. The Atlantic doesn't care about your checklist &mdash;
+        it just <em>is</em>, and you paddle into it.
+      </div>
+    </div>
+
+    <div class="note note-text">
+      <div class="field-label">Ironbound Island</div>
+      <div class="field-body">
+        Bigger than it looks on the chart. We rounded it slowly, hugging the lee side,
+        watching the kelp beds go by. <em>Nobody else out there.</em>
+      </div>
+    </div>
+
+    <div class="note note-text">
+      <div class="field-label">On tides</div>
+      <div class="field-body">
+        Atlantic tides move fast and don't negotiate.
+        You learn to read the water or you spend the day fighting it.
+        <em>Eventually it becomes instinct.</em>
+      </div>
+    </div>
+
+    <div class="note note-text span-full" style="background: #1a201e;">
+      <div class="field-label">Photos coming</div>
+      <div class="field-body">
+        Still hunting through the Nova Scotia roll. Will add when I find the good ones.
+        The fog shots especially deserve to be here.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="water-sep"></div>
+
+  <!-- ════════════════════════════════════
+       TRIP 2 — CLAYOQUOT SOUND
+  ════════════════════════════════════ -->
+
+  <div class="section-rule" style="margin-top: 52px;">
+    <span class="rule-label">Trip II</span>
+    <div class="rule-line"></div>
+    <span class="rule-meta">14 days &nbsp;&middot;&nbsp; ~2024</span>
+  </div>
+
+  <div class="trip-header">
+    <div class="trip-name">Clayoquot<br>Sound</div>
+    <div class="trip-where">Vancouver Island &nbsp;&middot;&nbsp; BC &nbsp;&middot;&nbsp; Pacific</div>
+    <p class="trip-desc">
+      Launching from Tofino into one of the most intact temperate rainforests left on the planet.
+      Old growth, open Pacific swells, orca country. The scale of things out here recalibrates you.
+    </p>
+  </div>
+
+  <!-- Clayoquot notes grid with actual photos -->
+  <div class="notes-grid layout-clay">
+
+    <!-- Photo 3: open water, bow pointing to mountains — hero -->
+    <div class="note note-photo span-full h-tall">
+      <img src="img/GOPR0098.JPG" alt="Kayak bow pointing toward mountains across open water, Clayoquot Sound">
+      <div class="note-caption">
+        <div class="caption-text">Bearing northwest. Map bungeed to the deck, water bottle wedged in. The mountains don't get closer for a long time.</div>
+        <div class="caption-coord">Clayoquot Sound &nbsp;&middot;&nbsp; mid-channel</div>
+      </div>
+    </div>
+
+    <!-- Photo 1: cockpit view of mossy rocks -->
+    <div class="note note-photo h-mid">
+      <img src="img/GOPR0116.JPG" alt="View from kayak cockpit of moss-covered intertidal rocks and clear water">
+      <div class="note-caption">
+        <div class="caption-text">Threading the intertidal zone at low water. The rocks are green all the way down. You can see the bottom through the hull.</div>
+        <div class="caption-coord">intertidal &nbsp;&middot;&nbsp; ~0.3m clearance</div>
+      </div>
+    </div>
+
+    <!-- Text note alongside -->
+    <div class="note note-text h-mid">
+      <div class="field-label">On paddling slowly</div>
+      <div class="field-body">
+        The urge on day one is to cover distance.
+        By day four you've slowed to match the water.
+        <em>The rocks worth looking at are the ones you nearly missed.</em>
+      </div>
+    </div>
+
+    <!-- Photo 4: sunset beach -->
+    <div class="note note-photo h-tall">
+      <img src="img/GOPR0172.JPG" alt="Sunset over a sand beach with driftwood, silhouetted trees">
+      <div class="note-caption">
+        <div class="caption-text">Camp. The fire was small and didn't need to be bigger. We sat until the light was completely gone.</div>
+        <div class="caption-coord">beach camp &nbsp;&middot;&nbsp; low tide evening</div>
+      </div>
+    </div>
+
+    <!-- Photo 5: blue dusk cove -->
+    <div class="note note-photo h-tall">
+      <img src="img/GOPR0247.JPG" alt="Blue dusk light over a crescent beach with dark rocks and treeline">
+      <div class="note-caption">
+        <div class="caption-text">After sunset, before dark. That particular blue that only lasts ten minutes. You stop whatever you're doing.</div>
+        <div class="caption-coord">dusk &nbsp;&middot;&nbsp; somewhere quiet</div>
+      </div>
+    </div>
+
+    <!-- Photo 2: ancient cedar with people -->
+    <div class="note note-photo span-full h-mid">
+      <img src="img/GOPR0112.JPG" alt="People standing at the base of a massive ancient cedar tree in old growth rainforest">
+      <div class="note-caption">
+        <div class="caption-text">A side trip into old growth. The cedar is several hundred years old. People become small in a useful way.</div>
+        <div class="caption-coord">Meares Island &nbsp;&middot;&nbsp; old growth trail</div>
+      </div>
+    </div>
+
+    <!-- Closing text note -->
+    <div class="note note-text span-full" style="background: #1c2520;">
+      <div class="field-label">14 days later</div>
+      <div class="field-body">
+        The thing about a long paddle trip is the re-entry. You come back and the city is the same
+        but you're slightly different &mdash; slower, more patient with silence.
+        <em>It takes about a week to wear off. You start planning the next one.</em>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span class="footer-note">more trips coming. the plan is Vancouver Island again, late April.</span>
+    <a class="footer-back" href="../index.html">&#8592; back to the wall</a>
+  </div>
+
+</body>
+</html>
