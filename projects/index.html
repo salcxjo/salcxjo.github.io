@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>projects . salar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Permanent+Marker&family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style type="text/css">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --paper:      #e8e0d0;
+      --paper-dark: #d4c9b2;
+      --paper-worn: #c9bda3;
+      --ink:        #1a1208;
+      --ink-mid:    #2e2414;
+      --red-stamp:  #8b1a1a;
+      --blue-stamp: #1a2a5e;
+      --green-tape: #4a6a3a;
+      --yellow:     #d4a017;
+      --correction: #f5f0e0;
+    }
+
+    body {
+      background-color: #2a2018;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect width='60' height='60' fill='%232a2018'/%3E%3Ccircle cx='10' cy='10' r='1' fill='%23ffffff' opacity='0.02'/%3E%3Ccircle cx='40' cy='35' r='1.5' fill='%23ffffff' opacity='0.015'/%3E%3C/svg%3E");
+      font-family: 'Courier Prime', monospace;
+      min-height: 100vh;
+      padding: 40px 20px 80px;
+    }
+
+    .spread { max-width: 900px; margin: 0 auto; position: relative; }
+
+    .back-tape {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--ink);
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      padding: 4px 18px 4px 10px;
+      transform: rotate(-1.5deg);
+      margin-bottom: 28px;
+      text-decoration: none;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+      letter-spacing: 0.05em;
+    }
+    .back-tape:hover { background: #e8b420; }
+
+    /* HEADER */
+    .zine-header {
+      background: var(--paper);
+      padding: 22px 28px 18px;
+      position: relative;
+      transform: rotate(-0.4deg);
+      box-shadow: 4px 4px 0 #1a1208, 8px 8px 20px rgba(0,0,0,0.5);
+      border: 2px solid var(--ink);
+    }
+    .zine-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .header-vol {
+      font-family: 'VT323', monospace;
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      color: var(--ink-mid);
+      text-transform: uppercase;
+      position: relative;
+    }
+    .header-title {
+      font-family: 'Permanent Marker', cursive;
+      font-size: clamp(38px, 7vw, 62px);
+      color: var(--ink);
+      line-height: 0.95;
+      position: relative;
+      margin: 8px 0 4px;
+    }
+    .header-sub {
+      font-family: 'Special Elite', monospace;
+      font-size: 13px;
+      color: var(--ink-mid);
+      position: relative;
+      border-top: 1px dashed var(--ink-mid);
+      padding-top: 8px;
+      margin-top: 10px;
+    }
+    .staple {
+      display: inline-block;
+      width: 18px; height: 6px;
+      border: 2px solid #888; border-radius: 1px;
+      background: #ccc;
+      position: absolute; z-index: 2;
+    }
+    .staple-tl { top: 10px; left: 24px; transform: rotate(-5deg); }
+    .staple-tr { top: 10px; right: 24px; transform: rotate(3deg); }
+
+    /* STAMPS */
+    .stamp {
+      font-family: 'VT323', monospace;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 3px solid currentColor;
+      display: inline-block;
+      padding: 2px 9px;
+      position: absolute;
+      z-index: 3;
+      opacity: 0.72;
+    }
+    .s-ongoing { color: var(--blue-stamp);  border-color: var(--blue-stamp);  font-size: 15px; transform: rotate(-12deg); }
+    .s-wip     { color: var(--blue-stamp);  border-color: var(--blue-stamp);  font-size: 12px; transform: rotate(-8deg);  }
+    .s-shipped { color: var(--green-tape);  border-color: var(--green-tape);  font-size: 12px; transform: rotate(-7deg);  }
+    .s-growing { color: var(--yellow);      border-color: var(--yellow);      font-size: 12px; transform: rotate(5deg);   }
+
+    /* TAPE */
+    .tape-l {
+      position: absolute; height: 18px; width: 80px;
+      background: rgba(212,160,23,0.38);
+      border-top: 1px solid rgba(212,160,23,0.55);
+      border-bottom: 1px solid rgba(212,160,23,0.55);
+      top: -8px; left: 30px; z-index: 10; transform: rotate(-1deg);
+    }
+    .tape-r {
+      position: absolute; height: 18px; width: 60px;
+      background: rgba(212,160,23,0.38);
+      border-top: 1px solid rgba(212,160,23,0.55);
+      border-bottom: 1px solid rgba(212,160,23,0.55);
+      top: -8px; right: 20px; z-index: 10; transform: rotate(2deg);
+    }
+
+    /* GRID */
+    .clippings {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 6px;
+    }
+
+    /* CARD BASE */
+    .clip {
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      padding: 18px 20px 16px;
+      position: relative;
+      box-shadow: 3px 3px 0 var(--ink);
+      overflow: visible;
+    }
+    .clip::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .clip-hero { grid-column: 1 / -1; transform: rotate(0.3deg); background: var(--correction); padding: 24px 26px 22px; margin-bottom: -2px; }
+    .clip-a    { transform: rotate(-0.8deg); margin-top: 14px; }
+    .clip-b    { transform: rotate(1.1deg);  margin-top: 14px; margin-left: -2px; }
+    .clip-c    { transform: rotate(-0.5deg); margin-top: -2px; }
+    .clip-d    { transform: rotate(0.7deg);  margin-top: -2px; margin-left: -2px; }
+    .clip-ghost { opacity: 0.42; background: var(--paper-dark); border-style: dashed; box-shadow: none; }
+
+    /* CONTENT */
+    .clip-label {
+      font-family: 'VT323', monospace; font-size: 11px;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--ink-mid); margin-bottom: 5px;
+      position: relative; z-index: 1;
+    }
+    .clip-title {
+      font-family: 'Permanent Marker', cursive; font-size: 26px;
+      color: var(--ink); line-height: 1.05; margin-bottom: 8px;
+      position: relative; z-index: 1;
+    }
+    .clip-hero .clip-title { font-size: 36px; }
+    .clip-desc {
+      font-family: 'Special Elite', monospace; font-size: 13px;
+      color: var(--ink-mid); line-height: 1.75;
+      position: relative; z-index: 1; margin-bottom: 10px;
+    }
+
+    /* PHASE LIST */
+    .phase-list { list-style: none; margin: 12px 0; position: relative; z-index: 1; }
+    .phase-list li {
+      font-family: 'Courier Prime', monospace; font-size: 12px;
+      color: var(--ink-mid); padding: 4px 0 4px 26px;
+      position: relative;
+      border-bottom: 1px dashed rgba(26,18,8,0.15);
+      line-height: 1.4;
+    }
+    .phase-list li:last-child { border-bottom: none; }
+    .phase-list li::before { content: '☐'; position: absolute; left: 4px; font-size: 14px; color: var(--ink-mid); }
+    .phase-list li.done::before  { content: '☑'; color: var(--green-tape); }
+    .phase-list li.active::before { content: '►'; color: var(--red-stamp); font-size: 10px; top: 6px; }
+    .phase-list li.done   { text-decoration: line-through; opacity: 0.5; }
+    .phase-list li.active { font-weight: 700; color: var(--ink); }
+    .pn {
+      font-family: 'VT323', monospace; font-size: 11px;
+      color: var(--paper-worn); background: var(--ink-mid);
+      padding: 0 4px; margin-right: 6px;
+    }
+
+    /* SPEC BOX */
+    .spec-box {
+      background: var(--paper-dark); border: 1.5px solid var(--ink-mid);
+      padding: 9px 12px; margin: 10px 0;
+      position: relative; z-index: 1;
+    }
+    .spec-title {
+      font-family: 'VT323', monospace; font-size: 12px;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--ink); margin-bottom: 5px;
+      border-bottom: 1px solid var(--ink-mid); padding-bottom: 3px;
+    }
+    .spec-row {
+      display: flex; justify-content: space-between;
+      font-family: 'Courier Prime', monospace; font-size: 11px;
+      color: var(--ink-mid); padding: 2px 0;
+      border-bottom: 1px dotted rgba(26,18,8,0.12); gap: 8px;
+    }
+    .spec-row:last-child { border-bottom: none; }
+    .sk { color: var(--ink); font-weight: 700; flex-shrink: 0; }
+    .sv { text-align: right; }
+
+    /* TAGS */
+    .tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; position: relative; z-index: 1; }
+    .tag {
+      font-family: 'VT323', monospace; font-size: 14px;
+      background: var(--ink); color: var(--paper);
+      padding: 1px 8px; letter-spacing: 0.08em;
+    }
+    .tag.out { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
+
+    /* SCRAWL */
+    .scrawl {
+      font-family: 'Permanent Marker', cursive; font-size: 12px;
+      color: var(--blue-stamp); transform: rotate(-3deg);
+      display: inline-block; margin-top: 8px;
+      position: relative; z-index: 1; opacity: 0.82;
+    }
+
+    /* CORNER FOLD */
+    .fold {
+      position: absolute; bottom: 0; right: 0;
+      width: 0; height: 0; border-style: solid;
+      border-width: 0 0 22px 22px;
+      border-color: transparent transparent var(--paper-dark) transparent;
+      z-index: 5;
+    }
+
+    /* FOOTER */
+    .zine-footer {
+      text-align: center; margin-top: 40px;
+      font-family: 'VT323', monospace; font-size: 14px;
+      color: #6a5a40; letter-spacing: 0.25em; line-height: 2;
+    }
+    .zine-footer a { color: #6a5a40; }
+    .zine-footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 620px) {
+      .clippings { grid-template-columns: 1fr; }
+      .clip-b, .clip-d { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="spread">
+
+  <a class="back-tape" href="../index.html">&#9668; back to the wall</a>
+
+  <!-- HEADER -->
+  <div class="zine-header">
+    <span class="staple staple-tl"></span>
+    <span class="staple staple-tr"></span>
+    <div class="header-vol">Vol. 1 &nbsp;&middot;&nbsp; Issue: ongoing &nbsp;&middot;&nbsp; Salar Mirikhoozani &mdash; SWE student, Edmonton AB</div>
+    <div class="header-title">COMPUTER<br>PROJECTS</div>
+    <div class="header-sub">a zine about building things &nbsp;&middot;&nbsp; some finished &middot; some halfway &middot; some just ideas taped to a wall &nbsp;&middot;&nbsp; C &middot; Python &middot; embedded Linux &middot; MQTT &middot; ML</div>
+  </div>
+
+  <div class="clippings">
+
+    <!-- HERO: HomeEdge -->
+    <div class="clip clip-hero">
+      <div class="tape-l"></div>
+      <div class="tape-r"></div>
+      <div class="stamp s-ongoing" style="top:16px; right:30px;">ONGOING</div>
+
+      <div class="clip-label">Featured Project &nbsp;&middot;&nbsp; 2025&ndash;present</div>
+      <div class="clip-title">HomeEdge</div>
+      <div class="clip-desc">
+        A home edge-ML and IoT system built from scratch on a Raspberry Pi 4 + Pico 2W.
+        The goal: a real sensor network that collects its own data, runs inference locally,
+        and never phones home. Eight phases from bare MQTT node to trained anomaly detection.
+      </div>
+
+      <div class="spec-box">
+        <div class="spec-title">// hardware manifest</div>
+        <div class="spec-row"><span class="sk">brain</span><span class="sv">Raspberry Pi 4</span></div>
+        <div class="spec-row"><span class="sk">node</span><span class="sv">Pico 2W (RP2350)</span></div>
+        <div class="spec-row"><span class="sk">sensors</span><span class="sv">DHT11 &middot; HC-SR501 &middot; BMP180 &middot; GL5516 &middot; SW-520D</span></div>
+        <div class="spec-row"><span class="sk">comms</span><span class="sv">MQTT over WiFi</span></div>
+        <div class="spec-row"><span class="sk">stack</span><span class="sv">MicroPython &middot; Python &middot; OpenCV &middot; TFLite &middot; SQLite</span></div>
+        <div class="spec-row"><span class="sk">ui</span><span class="sv">Streamlit &rarr; local web UI (Phase 8)</span></div>
+      </div>
+
+      <ul class="phase-list">
+        <li class="done"><span class="pn">P1</span> Pico 2W Core Node &mdash; DHT11, PIR, OLED, relay, WiFi, MQTT</li>
+        <li class="active"><span class="pn">P2</span> Pi Camera + OpenCV &mdash; motion detection, background subtraction, frame flagging</li>
+        <li><span class="pn">P3</span> TFLite Person Detection &mdash; MobileNet SSD, confidence thresholding on flagged frames</li>
+        <li><span class="pn">P4</span> Streamlit Dashboard &mdash; live feed, temp/humidity charts, event log, SQLite backend</li>
+        <li><span class="pn">P5</span> Expand Pico Node &mdash; pressure, light, tilt/tamper, buzzer, new MQTT topics</li>
+        <li><span class="pn">P6</span> Physical Control Panel &mdash; GPIO T-board, ADC, potentiometer thresholds, IR remote arming</li>
+        <li><span class="pn">P7</span> Anomaly Detection &mdash; autoencoder trained on own sensor data, pattern flagging</li>
+        <li><span class="pn">P8</span> Stretch &mdash; 2nd node, webhooks, servo gauge, PWM LED panel, local-only web UI</li>
+      </ul>
+
+      <div class="tags">
+        <span class="tag">MicroPython</span>
+        <span class="tag">MQTT</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">TFLite</span>
+        <span class="tag">SQLite</span>
+        <span class="tag out">edge-ML</span>
+        <span class="tag out">IoT</span>
+      </div>
+      <div class="scrawl" style="margin-top:14px;">&uarr; the one I'm actually proud of</div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD A: Helios -->
+    <div class="clip clip-a">
+      <div class="tape-l"></div>
+      <div class="stamp s-wip" style="top:12px; right:12px;">WIP</div>
+      <div class="clip-label">Team Project &nbsp;&middot;&nbsp; 2025</div>
+      <div class="clip-title">Helios</div>
+      <div class="clip-desc">
+        Android app built in Java with Firebase. Navigating an unfamiliar codebase as part of a team &mdash;
+        the experience of reading someone else's architecture before writing a single line of your own.
+      </div>
+      <div class="tags">
+        <span class="tag">Java</span>
+        <span class="tag">Android</span>
+        <span class="tag">Firebase</span>
+        <span class="tag out">team</span>
+      </div>
+      <div class="scrawl" style="color: var(--red-stamp);">reading code &gt; writing it first</div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD B: This website -->
+    <div class="clip clip-b">
+      <div class="tape-r"></div>
+      <div class="stamp s-growing" style="top:12px; right:12px;">GROWING</div>
+      <div class="clip-label">Personal Site &nbsp;&middot;&nbsp; 2025&ndash;</div>
+      <div class="clip-title">salcxjo<br>.github.io</div>
+      <div class="clip-desc">
+        This site. Vanilla HTML, no frameworks, no build step.
+        An ode to the early web &mdash; and a reminder that I am more than my offer letters.
+      </div>
+      <div class="spec-box">
+        <div class="spec-title">// pages so far</div>
+        <div class="spec-row"><span class="sk">index</span><span class="sv">GeoCities homepage</span></div>
+        <div class="spec-row"><span class="sk">books</span><span class="sv">78-book reading list</span></div>
+        <div class="spec-row"><span class="sk">poetry</span><span class="sv">Persian rug aesthetic</span></div>
+        <div class="spec-row"><span class="sk">projects</span><span class="sv">&larr; you are here</span></div>
+      </div>
+      <div class="tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag out">no-framework</span>
+      </div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD C: ECE 315 -->
+    <div class="clip clip-c">
+      <div class="tape-l"></div>
+      <div class="stamp s-shipped" style="top:12px; right:10px;">SHIPPED</div>
+      <div class="clip-label">ECE 315 &nbsp;&middot;&nbsp; Computer Interfacing</div>
+      <div class="clip-title">UART, SPI<br>&amp; FreeRTOS</div>
+      <div class="clip-desc">
+        Labs on the Zybo Z7 FPGA board: UART communication, FreeRTOS task scheduling,
+        SPI loopback. RP2040 system design and Wokwi simulation for Assignment 3.
+      </div>
+      <div class="tags">
+        <span class="tag">C</span>
+        <span class="tag">FreeRTOS</span>
+        <span class="tag">UART</span>
+        <span class="tag">SPI</span>
+        <span class="tag">RP2040</span>
+        <span class="tag out">Zybo Z7</span>
+      </div>
+      <div class="scrawl" style="color: var(--green-tape); font-size:11px;">Wokwi saves lives actually</div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD D: Ghost -->
+    <div class="clip clip-d clip-ghost">
+      <div class="clip-label">?? &nbsp;&middot;&nbsp; coming eventually</div>
+      <div class="clip-title">Next Thing</div>
+      <div class="clip-desc">
+        Haven't decided yet. Probably something physical.
+        Maybe something small and useful. The best projects always start with an itch.
+      </div>
+      <div class="tags">
+        <span class="tag out">TBD</span>
+        <span class="tag out">???</span>
+      </div>
+    </div>
+
+  </div><!-- /clippings -->
+
+  <div class="zine-footer">
+    &middot;&middot; always building &nbsp;&middot;&nbsp; never finished &nbsp;&middot;&nbsp; that's fine &middot;&middot;
+    <br>
+    <a href="../index.html">&larr; back to the wall</a>
+  </div>
+
+</div>
+</body>
+</html>
