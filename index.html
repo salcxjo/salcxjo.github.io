@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="description" content="Salar's personal homepage - welcome!!">
-  <meta name="keywords" content="salar, personal, homepage, outdoors, coding, life">
-  <title>*~* Salar's Homepage *~* Welcome!! *~*</title>
+  <meta name="description" content="Salar Mirikhoozani's personal homepage">
+  <meta name="keywords" content="salar, personal, homepage, kayaking, coding, life">
+  <title>Salar's Homepage</title>
 
   <style type="text/css">
     * { margin: 0; padding: 0; }
@@ -21,10 +21,7 @@
     a:visited { color: #ff99ff; }
     a:hover { color: #00ffff; text-decoration: none; }
 
-    .outer-wrap {
-      width: 780px;
-      margin: 8px auto;
-    }
+    .outer-wrap { width: 780px; margin: 8px auto; }
 
     /* BANNER */
     .header-banner {
@@ -80,12 +77,7 @@
       flex-wrap: wrap;
       align-items: center;
     }
-    .nav-label {
-      font-size: 11px;
-      color: #000000;
-      font-weight: bold;
-      margin-right: 4px;
-    }
+    .nav-label { font-size: 11px; color: #000000; font-weight: bold; margin-right: 4px; }
     .nav-btn {
       background: linear-gradient(180deg, #e0e0e0, #a0a0a0);
       border: 2px outset #ffffff;
@@ -105,15 +97,10 @@
     .nav-btn:visited { color: #000000; }
 
     /* MAIN LAYOUT */
-    .main-layout {
-      display: flex;
-      gap: 5px;
-      margin-top: 5px;
-    }
+    .main-layout { display: flex; gap: 5px; margin-top: 5px; }
 
     /* SIDEBAR */
     .sidebar { width: 178px; flex-shrink: 0; }
-
     .sbox {
       background-color: #000033;
       border: 2px inset #ffffff;
@@ -131,11 +118,7 @@
       border-bottom: 1px solid #9999ff;
       font-family: "Comic Sans MS", cursive;
     }
-    .sbox p, .sbox li {
-      font-size: 11px;
-      color: #ccccff;
-      line-height: 1.65;
-    }
+    .sbox p, .sbox li { font-size: 11px; color: #ccccff; line-height: 1.65; }
     .sbox ul { padding-left: 14px; }
     .sbox a { color: #ffff99; font-size: 11px; }
 
@@ -152,13 +135,11 @@
 
     .spin { display: inline-block; animation: spin 2s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
     .blink { animation: blink 1s step-end infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
     /* MAIN CONTENT */
     .main-content { flex: 1; min-width: 0; }
-
     .cbox {
       background-color: #000033;
       border: 2px inset #ffffff;
@@ -177,7 +158,6 @@
       border-bottom: 2px solid #ff6666;
       letter-spacing: 1px;
     }
-
     .manifesto {
       font-family: "Comic Sans MS", cursive;
       font-size: 12px;
@@ -226,9 +206,28 @@
       margin-top: 3px;
       font-family: Verdana, sans-serif;
     }
-    .tile-tbl td.soon {
-      background: linear-gradient(180deg, #1a0a0a, #0a0000);
-      border-style: dashed;
+
+    /* WIP tiles */
+    .tile-tbl td.wip {
+      background: linear-gradient(180deg, #0d0d1a, #080810);
+      border: 1px dashed #333355;
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .tile-tbl td.wip:hover {
+      background: linear-gradient(180deg, #0d0d1a, #080810);
+      border: 1px dashed #333355;
+    }
+    .tile-tbl td.wip .t-name { color: #555577; }
+    .tile-tbl td.wip .t-desc { color: #3a3a55; }
+    .wip-badge {
+      font-size: 8px;
+      color: #444466;
+      font-family: "Courier New", monospace;
+      letter-spacing: 0.08em;
+      display: block;
+      margin-top: 5px;
+      text-transform: uppercase;
     }
 
     /* UNDER CONSTRUCTION */
@@ -277,29 +276,29 @@
 
   <!-- BANNER -->
   <div class="header-banner">
-    <div class="sparkle-row">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
-    <div class="site-title">*~* SALAR'S HOMEPAGE *~*</div>
+    <div class="sparkle-row">&#10022; &#10023; &#10022; &#10023; &#10022; &#10023; &#10022; &#10023; &#10022;</div>
+    <div class="site-title">SALAR'S HOMEPAGE</div>
     <div class="site-subtitle">.: a gathering of fractions &nbsp;|&nbsp; part of what makes whole :.</div>
     <div style="margin-top:5px; font-size:11px; color:#ffccff; font-family:'Comic Sans MS',cursive;">
       in a world of specialization, i am left behind with all my interests &mdash; and i wouldn't have it any other way
     </div>
-    <div class="sparkle-row" style="margin-top:5px;">✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦</div>
+    <div class="sparkle-row" style="margin-top:5px;">&#10022; &#10023; &#10022; &#10023; &#10022; &#10023; &#10022; &#10023; &#10022;</div>
   </div>
 
   <!-- MARQUEE -->
   <div class="marquee-bar">
     <span class="marquee-inner">
-      &nbsp;&nbsp;&nbsp; ★ welcome to my little corner of the internet ★ &nbsp;&nbsp; ·· computer nerd ·· kayaker ·· skier ·· reader ·· cook ·· occasional poet ·· former tradie ·· cyclist ·· walker ·· runner ·· &nbsp;&nbsp; ★ you are visitor #001337 ★ &nbsp;&nbsp; still under construction. always. &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp; &#9733; welcome to my little corner of the internet &#9733; &nbsp;&nbsp; &middot;&middot; computer nerd &middot;&middot; kayaker &middot;&middot; skier &middot;&middot; reader &middot;&middot; cook &middot;&middot; occasional poet &middot;&middot; mountain biker &middot;&middot; walker &middot;&middot; runner &middot;&middot; &nbsp;&nbsp; still under construction. always. &nbsp;&nbsp;&nbsp;
     </span>
   </div>
 
   <!-- NAV -->
   <div class="nav-bar">
-    <span class="nav-label">NAVIGATE:</span>
+    <span class="nav-label">Navigate:</span>
     <a class="nav-btn" href="#about">About Me</a>
     <a class="nav-btn" href="#tiles">My Pages</a>
-    <a class="nav-btn" href="mailto:mirikhoo@ualberta.">Email Me!!</a>
-    <a class="nav-btn" href="https://linkedin.com/in/salarmiri/" target="_blank">LinkedIn</a>
+    <a class="nav-btn" href="mailto:salar@example.com">Email Me</a>
+    <a class="nav-btn" href="https://linkedin.com/in/salar-mirikhoozani" target="_blank">LinkedIn</a>
     <a class="nav-btn" href="https://github.com/salcxjo" target="_blank">GitHub</a>
   </div>
 
@@ -310,52 +309,41 @@
     <div class="sidebar">
 
       <div class="sbox" id="about">
-        <div class="sbox-title">⭐ About Me ⭐</div>
-        <p>Hi!! I'm <strong style="color:#ffff00;">Salar</strong>, an engineering student in Edmonton, AB 🇨🇦</p>
+        <div class="sbox-title">&#11088; About Me &#11088;</div>
+        <p>Hi! I'm <strong style="color:#ffff00;">Salar Mirikhoozani</strong>, an EE student in Edmonton, AB &#127464;&#127462;</p>
         <br>
-        <p>I made this page because I'm <span style="color:#00ffff;font-weight:bold;">more</span> than my resume &mdash; and so are you :)</p>
+        <p>I made this page because I'm <span style="color:#00ffff;font-weight:bold;">more</span> than my resume &mdash; and so are you.</p>
         <br>
-        <p>This site is an ode to early internet &mdash; those fast little HTML pages that made me fall in love with computers in the first place.</p>
+        <p>An ode to early internet &mdash; those fast little HTML pages that made me fall in love with computers.</p>
       </div>
 
       <div class="sbox">
-        <div class="sbox-title">📊 Visitor Count</div>
-        <p style="text-align:center; margin-bottom:5px;">you are visitor:</p>
+        <div class="sbox-title">&#128202; Visitors</div>
+        <p style="text-align:center; margin-bottom:5px;">visitor count:</p>
         <div style="text-align:center;">
-          <span class="hit-counter" id="counter">001338</span>
+          <span class="hit-counter">001342</span>
         </div>
-        <p style="text-align:center; margin-top:4px; font-size:10px; color:#666699;">(totally real number)</p>
       </div>
 
       <div class="sbox">
-        <div class="sbox-title">🎵 Now Playing</div>
+        <div class="sbox-title">&#127925; Now Playing</div>
         <p style="font-size:11px; color:#aaaacc; line-height:1.7;">
-          <span class="spin">♪</span> whatever feels right today
+          <span class="spin">&#9834;</span> whatever feels right today
         </p>
         <hr class="rainbow">
         <p style="font-size:11px; color:#9999cc;">Mood: <span style="color:#00ffff;">curious</span></p>
-        <p style="font-size:11px; color:#9999cc;">Status: <span style="color:#00ff00;" class="blink">● online</span></p>
+        <p style="font-size:11px; color:#9999cc;">Status: <span style="color:#00ff00;" class="blink">&#9679; online</span></p>
       </div>
 
       <div class="sbox">
-        <div class="sbox-title">🔗 Links</div>
+        <div class="sbox-title">&#128279; Links</div>
         <ul>
-          <li><a href="https://github.com">My GitHub</a></li>
-          <li><a href="https://linkedin.com">LinkedIn</a></li>
+          <li><a href="https://github.com/salcxjo">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/salar-mirikhoozani">LinkedIn</a></li>
           <li><a href="./projects/">Projects</a></li>
-          <li><a href="./kayaking/">Kayak Logs</a></li>
+          <li><a href="./kayaking/">Kayaking</a></li>
           <li><a href="./books/">Reading List</a></li>
         </ul>
-      </div>
-
-      <div class="sbox" style="text-align:center;">
-        <div class="sbox-title">🏅 Site Awards</div>
-        <p style="font-size:10px; color:#ffff99; line-height:1.9;">
-          ★ Best Personal Page<br>
-          ★ Most Interests (2026)<br>
-          ★ Valid HTML*<br>
-          <span style="font-size:9px; color:#666699;">(*probably not)</span>
-        </p>
       </div>
 
     </div><!-- /sidebar -->
@@ -364,7 +352,7 @@
     <div class="main-content">
 
       <div class="cbox">
-        <div class="cbox-title">✨ WHO IS THIS GUY?? ✨</div>
+        <div class="cbox-title">&#10024; WHO IS THIS GUY? &#10024;</div>
         <div class="manifesto">
           <p><strong>A place to gather fractions of me</strong> &mdash; part of what makes whole.</p>
           <br>
@@ -372,93 +360,96 @@
           <br>
           <p>Job hunting tried to convince me my worth = my offer letter. This page is my answer to that. I am a <strong>software nerd</strong> AND a <strong>kayaker</strong> AND someone who thinks about <strong>poetry</strong> at weird hours AND a person who respects people who work with their <strong>hands</strong>. None of these cancel out the others.</p>
           <br>
-          <p style="font-size:11px; color:#9999cc;">↓ scroll down to see the tiles of my wall ↓</p>
+          <p style="font-size:11px; color:#9999cc;">&#8595; scroll down to see the tiles of my wall &#8595;</p>
         </div>
       </div>
 
       <hr class="rainbow">
 
       <div class="cbox" id="tiles">
-        <div class="cbox-title">🌐 THE TILES OF MY WALL 🌐</div>
+        <div class="cbox-title">&#127760; THE TILES OF MY WALL &#127760;</div>
 
         <p style="font-size:11px; color:#9999cc; margin-bottom:8px; text-align:center;">
-          click a tile to explore that part of me &nbsp;<span class="blink">▼</span>
+          click a tile to explore that part of me &nbsp;<span class="blink">&#9660;</span>
         </p>
 
         <table class="tile-tbl">
           <tr>
             <td><a href="./projects/">
-              <span class="t-icon">⌨️</span>
+              <span class="t-icon">&#9000;&#65039;</span>
               <span class="t-name">Computer<br>Projects</span>
               <span class="t-desc">code, builds &amp; side quests</span>
             </a></td>
             <td><a href="./kayaking/">
-              <span class="t-icon">🛶</span>
+              <span class="t-icon">&#128694;</span>
               <span class="t-name">Kayaking</span>
               <span class="t-desc">routes, water, silence</span>
             </a></td>
             <td><a href="./skiing/">
-              <span class="t-icon">⛷️</span>
+              <span class="t-icon">&#9975;&#65039;</span>
               <span class="t-name">Skiing</span>
               <span class="t-desc">cold mountains, good turns</span>
             </a></td>
-            <td><a href="./biking/">
-              <span class="t-icon">🚵</span>
-              <span class="t-name">Biking</span>
-              <span class="t-desc">trails &amp; close calls</span>
-            </a></td>
-          </tr>
-          <tr>
             <td><a href="./poetry/">
-              <span class="t-icon">📜</span>
+              <span class="t-icon">&#128220;</span>
               <span class="t-name">Poetry</span>
               <span class="t-desc">words for the quiet moments</span>
             </a></td>
-            <td><a href="./cooking/">
-              <span class="t-icon">🍳</span>
-              <span class="t-name">Cooking</span>
-              <span class="t-desc">recipes &amp; experiments</span>
-            </a></td>
+          </tr>
+          <tr>
             <td><a href="./books/">
-              <span class="t-icon">📚</span>
+              <span class="t-icon">&#128218;</span>
               <span class="t-name">Books</span>
               <span class="t-desc">what i've read &amp; loved</span>
             </a></td>
-            <td><a href="./trades/">
-              <span class="t-icon">🔧</span>
-              <span class="t-name">Trades</span>
-              <span class="t-desc">respecting work with hands</span>
+            <td><a href="./movement/">
+              <span class="t-icon">&#127939;</span>
+              <span class="t-name">Running &amp;<br>Walking</span>
+              <span class="t-desc">on foot, in motion</span>
             </a></td>
+            <!-- WIP tiles -->
+            <td class="wip">
+              <span class="t-icon">&#127859;</span>
+              <span class="t-name">Cooking</span>
+              <span class="t-desc">recipes &amp; experiments</span>
+              <span class="wip-badge">[ work in progress ]</span>
+            </td>
+            <td class="wip">
+              <span class="t-icon">&#128693;</span>
+              <span class="t-name">Mountain<br>Biking</span>
+              <span class="t-desc">trails &amp; close calls</span>
+              <span class="wip-badge">[ work in progress ]</span>
+            </td>
           </tr>
           <tr>
-            <td><a href="./walking/">
-              <span class="t-icon">🚶</span>
-              <span class="t-name">Walking</span>
-              <span class="t-desc">going nowhere in particular</span>
-            </a></td>
-            <td><a href="./running/">
-              <span class="t-icon">🏃</span>
-              <span class="t-name">Running</span>
-              <span class="t-desc">slowly, joyfully</span>
-            </a></td>
-            <td class="soon"><a href="#">
-              <span class="t-icon">❓</span>
+            <td class="wip" style="border-style:dashed;">
+              <span class="t-icon">&#10067;</span>
               <span class="t-name">???</span>
-              <span class="t-desc">more tiles coming soon</span>
-            </a></td>
-            <td class="soon"><a href="#">
-              <span class="t-icon">🚧</span>
+              <span class="t-desc">more coming</span>
+              <span class="wip-badge">[ tbd ]</span>
+            </td>
+            <td class="wip" style="border-style:dashed;">
+              <span class="t-icon">&#128679;</span>
               <span class="t-name">Coming<br>Soon</span>
               <span class="t-desc">who knows what's next</span>
-            </a></td>
+              <span class="wip-badge">[ tbd ]</span>
+            </td>
+            <td class="wip" style="border-style:dashed; opacity:0.2;">
+              <span class="t-icon">&nbsp;</span>
+              <span class="t-name">&nbsp;</span>
+            </td>
+            <td class="wip" style="border-style:dashed; opacity:0.2;">
+              <span class="t-icon">&nbsp;</span>
+              <span class="t-name">&nbsp;</span>
+            </td>
           </tr>
         </table>
 
         <div class="uc-bar">
-          <span class="uc-text">🚧 &nbsp; THIS SITE IS UNDER CONSTRUCTION &nbsp; 🚧</span>
+          <span class="uc-text">&#128679; &nbsp; UNDER CONSTRUCTION &nbsp; &#128679;</span>
         </div>
 
-      </div><!-- /cbox -->
+      </div>
 
     </div><!-- /main-content -->
   </div><!-- /main-layout -->
@@ -466,23 +457,11 @@
   <!-- FOOTER -->
   <div class="footer">
     <hr class="rainbow" style="margin-bottom:6px;">
-    <p>© 2026 Salar's Homepage &nbsp;·&nbsp; Made with ♥ and too much free time &nbsp;·&nbsp; No tracking. No ads. Just vibes.</p>
-    <p class="small">Best viewed in any browser &nbsp;|&nbsp; 1024×768 or better &nbsp;|&nbsp; <span style="color:#ff9999;">♥</span> thanks for visiting</p>
-    <p style="margin-top:4px; font-size:10px; color:#444477; font-style:italic;">
-      this site exists because i needed a reminder: i am more than my job applications.
-    </p>
+    <p>&copy; 2026 Salar Mirikhoozani &nbsp;&middot;&nbsp; No tracking. No ads.</p>
+    <p class="small">this site exists because i needed a reminder: i am more than my job applications.</p>
   </div>
 
 </div><!-- /outer-wrap -->
-
-<script>
-  try {
-    const base = 1337;
-    const visits = parseInt(localStorage.getItem('salar_v') || '0') + 1;
-    localStorage.setItem('salar_v', visits);
-    document.getElementById('counter').textContent = String(base + visits).padStart(6, '0');
-  } catch(e) {}
-</script>
 
 </body>
 </html>

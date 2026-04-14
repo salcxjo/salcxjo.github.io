@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>running &amp; walking · salar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --white:      #ffffff;
+      --off:        #f8f7f4;
+      --ink:        #1a1916;
+      --ink-soft:   #5c574f;
+      --ink-faint:  #a09890;
+      --border:     rgba(26,25,22,0.1);
+
+      --green:      #2d6a4f;
+      --green-mid:  #52b788;
+      --green-pale: #d8f3dc;
+
+      --purple:     #5e4b8b;
+      --purple-mid: #9d84d0;
+      --purple-pale:#ede9f8;
+
+      --orange:     #c45c1a;
+      --orange-mid: #e07a3a;
+      --orange-pale:#fde8d8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── BACK ── */
+    .back {
+      display: inline-block;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 28px 48px 0;
+      transition: color 0.15s;
+    }
+    .back:hover { color: var(--ink-soft); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 48px 0;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: end;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 48px;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(56px, 7vw, 88px);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .hero-title .accent-run   { color: var(--orange); }
+    .hero-title .accent-walk  { color: var(--green); }
+    .hero-title .divider      { color: var(--purple-mid); font-weight: 300; font-style: italic; font-size: 0.6em; vertical-align: middle; margin: 0 6px; }
+
+    .hero-right {
+      padding-left: 48px;
+      border-left: 1px solid var(--border);
+    }
+
+    .hero-desc {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .city-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--ink-soft);
+      background: var(--off);
+      transition: all 0.15s;
+    }
+    .chip:hover {
+      border-color: var(--purple-mid);
+      color: var(--purple);
+      background: var(--purple-pale);
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .label-run    { color: var(--orange); }
+    .label-walk   { color: var(--green); }
+    .label-cities { color: var(--purple); }
+
+    /* ── RUNNING SECTION ── */
+    .run-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .run-story p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+    .run-story p:last-child { margin-bottom: 0; }
+    .run-story em { font-style: italic; color: var(--ink); }
+
+    /* stat cards */
+    .run-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .stat-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      background: var(--off);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .stat-card:hover {
+      border-color: rgba(196,92,26,0.35);
+      transform: translateY(-2px);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .stat-card.orange::before { background: var(--orange); }
+    .stat-card.green::before  { background: var(--green-mid); }
+    .stat-card.purple::before { background: var(--purple-mid); }
+
+    .stat-value {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      line-height: 1.5;
+    }
+    .stat-note {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-top: 6px;
+    }
+
+    /* interests pills */
+    .interest-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .interest-pill {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      padding: 6px 14px;
+      border-radius: 4px;
+    }
+    .pill-orange { background: var(--orange-pale); color: var(--orange); }
+    .pill-purple { background: var(--purple-pale); color: var(--purple); }
+    .pill-green  { background: var(--green-pale);  color: var(--green);  }
+
+    /* ── WALKING SECTION ── */
+    .walk-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .walk-story p {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+    }
+    .walk-story em { font-style: italic; color: var(--ink); }
+
+    .pull-quote {
+      padding: 22px 24px;
+      background: var(--green-pale);
+      border-left: 3px solid var(--green-mid);
+      margin: 24px 0 0;
+    }
+    .pull-quote p {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--green);
+      line-height: 1.65;
+      margin: 0 !important;
+    }
+
+    /* kinds of walks */
+    .walk-kinds { }
+
+    .walk-kind {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .walk-kind:first-child { border-top: 1px solid var(--border); }
+
+    .walk-kind-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green);
+      padding: 3px 8px;
+      background: var(--green-pale);
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .walk-kind-text {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .walk-kind-text strong {
+      font-weight: 500;
+      color: var(--ink);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    /* ── CITIES SECTION ── */
+    .cities-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .city-card {
+      padding: 24px 20px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+      cursor: default;
+    }
+    .city-card:hover {
+      border-color: transparent;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    }
+    .city-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .city-card:hover::after { opacity: 1; }
+
+    .cc-shiraz::after   { background: var(--orange); }
+    .cc-tehran::after   { background: var(--purple-mid); }
+    .cc-istanbul::after { background: var(--green-mid); }
+    .cc-toronto::after  { background: var(--orange-mid); }
+    .cc-edmonton::after { background: var(--purple); }
+
+    .city-name {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .city-country {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 12px;
+    }
+    .city-note {
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 48px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-thought {
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink-faint);
+    }
+    .footer-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      transition: color 0.15s;
+    }
+    .footer-back:hover { color: var(--ink-soft); }
+
+    @media (max-width: 760px) {
+      .hero, .run-grid, .walk-grid { grid-template-columns: 1fr; }
+      .hero-right { padding-left: 0; border-left: none; border-top: 1px solid var(--border); padding-top: 32px; margin-top: 32px; }
+      .cities-grid { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 48px 24px; }
+      .back, .page-footer { padding-left: 24px; padding-right: 24px; }
+      .hero { padding: 32px 24px 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="back" href="../index.html">← back to the wall</a>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">on foot · in motion · slow &amp; fast</div>
+      <h1 class="hero-title">
+        <span class="accent-run">Running</span><br>
+        <span class="divider">&amp;</span><br>
+        <span class="accent-walk">Walking</span>
+      </h1>
+    </div>
+    <div class="hero-right">
+      <p class="hero-desc">
+        Two ways of moving through the world at the right speed. One for going somewhere, one for being somewhere. Both for thinking.
+      </p>
+      <div class="city-chips">
+        <span class="chip">Shiraz</span>
+        <span class="chip">Tehran</span>
+        <span class="chip">Istanbul</span>
+        <span class="chip">Toronto</span>
+        <span class="chip">Edmonton</span>
+        <span class="chip">Red Deer</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUNNING -->
+  <div class="section">
+    <div class="section-label label-run">Running</div>
+    <div class="run-grid">
+      <div class="run-story">
+        <p>
+          I played basketball for years. When I moved to Canada the team structure fell away —
+          different city, first year engineering eating all available hours.
+          Running filled the gap, not immediately, but gradually.
+        </p>
+        <p>
+          In Red Deer, the trail systems cut through river valleys and ravines.
+          Going out there became a kind of <em>sanctuary</em> — a place first year couldn't follow.
+          The problems you carry tend to resolve themselves somewhere around the third kilometre.
+        </p>
+        <p>
+          It's never been about performance. It's grounding and meditative — a way of thinking that
+          happens to involve moving your legs. I like the nerdy side too: biomechanics,
+          pacing theory, why easy runs make you faster. I fall into those rabbit holes happily.
+        </p>
+        <p>
+          I run alone mostly, but community matters. Run clubs, park runs,
+          the quiet nod between two people out early — a small culture and a good one.
+        </p>
+        <div class="interest-row">
+          <span class="interest-pill pill-orange">biomechanics</span>
+          <span class="interest-pill pill-orange">pacing theory</span>
+          <span class="interest-pill pill-purple">park run</span>
+          <span class="interest-pill pill-purple">run clubs</span>
+          <span class="interest-pill pill-green">trail running</span>
+          <span class="interest-pill pill-green">river valleys</span>
+        </div>
+      </div>
+
+      <div class="run-stats">
+        <div class="stat-card orange" style="grid-column: 1 / -1;">
+          <div class="stat-value">Sanctuary</div>
+          <div class="stat-label">what running became<br>after basketball</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-value">3km</div>
+          <div class="stat-label">where problems<br>usually resolve</div>
+          <div class="stat-note">give or take</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-value">Trail</div>
+          <div class="stat-label">preferred<br>surface</div>
+          <div class="stat-note">Red Deer river valley</div>
+        </div>
+        <div class="stat-card orange" style="grid-column: 1 / -1; background: var(--orange-pale); border-color: rgba(196,92,26,0.2);">
+          <p style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 16px; font-weight: 300; color: var(--orange); line-height: 1.65; margin: 0;">
+            "not every run is about the run"
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WALKING -->
+  <div class="section">
+    <div class="section-label label-walk">Walking</div>
+    <div class="walk-grid">
+      <div class="walk-story">
+        <p>
+          There is a version of travel that moves too fast to see anything.
+          Walking is the correction. The pace at which the world was meant to be looked at.
+        </p>
+        <p>
+          Humans evolved as persistence hunters — not fast, but relentless.
+          Built to walk long distances and notice things.
+          The noticing is the point. You don't understand a place from a car.
+          You understand it on foot, slowly, over many visits.
+        </p>
+        <p>
+          I have specific walks for specific days — a long one on Sundays when there's nothing
+          that needs to happen quickly, a shorter loop mid-week. They're not routes so much as rhythms:
+          familiar enough that the legs move without instruction, which frees the mind to do its other work.
+        </p>
+        <div class="pull-quote">
+          <p>some walks are meant for thinking, others for noticing — the skill is knowing which one you need</p>
+        </div>
+      </div>
+
+      <div class="walk-kinds">
+        <div class="walk-kind">
+          <span class="walk-kind-tag">thinking</span>
+          <div class="walk-kind-text">
+            <strong>The thinking walk</strong>
+            No destination. The problem you're carrying usually resolves somewhere around the third kilometre.
+          </div>
+        </div>
+        <div class="walk-kind">
+          <span class="walk-kind-tag">noticing</span>
+          <div class="walk-kind-text">
+            <strong>The noticing walk</strong>
+            Slow. Eyes open. The one where you stop to look at things — a roof line, a tree you've passed a hundred times.
+          </div>
+        </div>
+        <div class="walk-kind">
+          <span class="walk-kind-tag">decompress</span>
+          <div class="walk-kind-text">
+            <strong>The decompression walk</strong>
+            After something difficult. The body moving is enough. You don't need to arrive anywhere.
+          </div>
+        </div>
+        <div class="walk-kind">
+          <span class="walk-kind-tag">explore</span>
+          <div class="walk-kind-text">
+            <strong>The exploration walk</strong>
+            A new neighbourhood, a new city. No shortcuts. Get a little lost on purpose.
+          </div>
+        </div>
+        <div class="walk-kind">
+          <span class="walk-kind-tag">early</span>
+          <div class="walk-kind-text">
+            <strong>The early walk</strong>
+            Before most people are moving. The world is still soft. You get it briefly to yourself.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CITIES -->
+  <div class="section" style="border-bottom: none;">
+    <div class="section-label label-cities">Cities walked</div>
+    <div class="cities-grid">
+      <div class="city-card cc-shiraz">
+        <div class="city-name">Shiraz</div>
+        <div class="city-country">Iran</div>
+        <div class="city-note">Where it started. The old city, the bazaars, the long evenings. Walking was just how you got around.</div>
+      </div>
+      <div class="city-card cc-tehran">
+        <div class="city-name">Tehran</div>
+        <div class="city-country">Iran</div>
+        <div class="city-note">Enormous and dense. You can walk for hours and feel like you've only seen a corner of it.</div>
+      </div>
+      <div class="city-card cc-istanbul">
+        <div class="city-name">Istanbul</div>
+        <div class="city-country">Turkey</div>
+        <div class="city-note">Hills and water everywhere. Every walk ends with a view you didn't expect.</div>
+      </div>
+      <div class="city-card cc-toronto">
+        <div class="city-name">Toronto</div>
+        <div class="city-country">Canada</div>
+        <div class="city-note">The ravine system is a secret city within the city. Most people never find it.</div>
+      </div>
+      <div class="city-card cc-edmonton">
+        <div class="city-name">Edmonton</div>
+        <div class="city-country">Canada</div>
+        <div class="city-note">The river valley in all seasons. Longest urban parkland in North America, and almost always quiet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <span class="footer-thought">go slowly — there's more to see than you think</span>
+    <a class="footer-back" href="../index.html">← back to the wall</a>
+  </div>
+
+</body>
+</html>
