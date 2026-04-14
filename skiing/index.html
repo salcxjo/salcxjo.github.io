@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>skiing . salar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #f2ead8;
+      background-image:
+        repeating-linear-gradient(180deg,
+          transparent 0px, transparent 3px,
+          rgba(160,120,60,0.04) 3px, rgba(160,120,60,0.04) 4px,
+          transparent 4px, transparent 9px,
+          rgba(140,100,50,0.03) 9px, rgba(140,100,50,0.03) 10px),
+        repeating-radial-gradient(ellipse at 60% 40%,
+          transparent 0px, transparent 60px,
+          rgba(160,120,60,0.06) 61px, rgba(160,120,60,0.06) 62px,
+          transparent 62px, transparent 120px,
+          rgba(160,120,60,0.05) 121px, rgba(160,120,60,0.05) 122px,
+          transparent 122px, transparent 180px,
+          rgba(160,120,60,0.04) 181px, rgba(160,120,60,0.04) 182px);
+    }
+    button { font-family: inherit; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const C = {
+      parchment:   "#f2ead8",
+      amber:       "#b5740a",
+      amberDim:    "#8a5808",
+      bark:        "#3d2a0e",
+      barkMid:     "#5c4020",
+      barkSoft:    "#7a5c30",
+      snow:        "#faf7f0",
+      pine:        "#2e4030",
+      fog:         "#8a9090",
+    };
+
+    const ALPINE = [
+      { name: "Red Mountain Resort",        loc: "Rossland, BC",      note: "My favourite. Steep, uncrowded, real.", fav: true },
+      { name: "Revelstoke Mountain Resort", loc: "Revelstoke, BC",    note: "The vertical is absurd. The town earns it." },
+      { name: "Fernie Alpine Resort",       loc: "Fernie, BC",        note: "Bowl skiing that goes on and on." },
+      { name: "Kicking Horse Mountain",     loc: "Golden, BC",        note: "Exposure, eagles, big sky." },
+      { name: "Lake Louise Ski Resort",     loc: "Banff, AB",         note: "The view from the top stops you every time." },
+      { name: "Sunshine Village",           loc: "Banff, AB",         note: "High alpine, long season." },
+      { name: "Mt. Norquay",               loc: "Banff, AB",         note: "Small and honest. Good for early season legs." },
+      { name: "Marmot Basin",              loc: "Jasper, AB",        note: "Quiet. The Rockies at their most itself." },
+      { name: "Castle Mountain Resort",    loc: "Pincher Creek, AB", note: "Hidden gem. Locals know." },
+    ];
+
+    const NORDIC = [
+      { name: "Waskahegan Trail",       loc: "Near Edmonton, AB", note: "My home trail. Know every corner of it now.", fav: true },
+      { name: "Cooking Lake–Blackfoot", loc: "Sherwood Park, AB", note: "Flat and meditative. Good for long km days." },
+      { name: "Canmore Nordic Centre",  loc: "Canmore, AB",       note: "World-class grooming. Humbling in the best way." },
+      { name: "Frozen Lake Loop",       loc: "Banff, AB",         note: "Short but beautiful. Worth the drive." },
+    ];
+
+    function Mountains() {
+      return (
+        <svg viewBox="0 0 1200 200" preserveAspectRatio="xMidYMax slice"
+          style={{ width: "100%", height: "170px", display: "block" }}>
+          <defs>
+            <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#c2d2e2" stopOpacity="0.7"/>
+              <stop offset="100%" stopColor="#e8dcc4" stopOpacity="0"/>
+            </linearGradient>
+            <linearGradient id="snowG" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#faf7f0"/>
+              <stop offset="100%" stopColor="#d8cca8"/>
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="200" fill="url(#skyG)"/>
+          <path d="M0,175 L80,115 L160,140 L260,80 L340,105 L420,65 L500,95 L580,55 L660,85 L740,50 L820,75 L900,42 L980,68 L1060,36 L1140,64 L1200,84 L1200,200 L0,200 Z"
+            fill="#c0b898" opacity="0.45"/>
+          <path d="M0,195 L60,155 L120,170 L200,125 L280,150 L360,110 L440,135 L520,100 L600,125 L680,93 L760,113 L840,83 L920,103 L1000,75 L1080,95 L1160,70 L1200,90 L1200,200 L0,200 Z"
+            fill={C.pine} opacity="0.5"/>
+          <path d="M0,200 L0,188 L60,178 L110,188 L160,172 L210,184 L265,164 L315,177 L370,158 L430,172 L490,152 L550,166 L610,145 L668,160 L728,140 L788,156 L848,136 L908,152 L968,132 L1028,148 L1090,128 L1148,145 L1200,128 L1200,200 Z"
+            fill={C.pine}/>
+          <path d="M260,80 L278,97 L296,82 Z" fill="url(#snowG)" opacity="0.85"/>
+          <path d="M420,65 L438,82 L455,67 Z" fill="url(#snowG)" opacity="0.9"/>
+          <path d="M580,55 L598,74 L615,58 Z" fill="url(#snowG)" opacity="0.9"/>
+          <path d="M740,50 L757,68 L774,53 Z" fill="url(#snowG)" opacity="0.9"/>
+          <path d="M900,42 L918,60 L935,45 Z" fill="url(#snowG)" opacity="0.9"/>
+          <path d="M1060,36 L1078,55 L1095,40 Z" fill="url(#snowG)" opacity="0.85"/>
+        </svg>
+      );
+    }
+
+    function Divider() {
+      return <div style={{ height: "1px", background: `linear-gradient(90deg, transparent, ${C.amberDim}, transparent)`, opacity: 0.3 }} />;
+    }
+
+    function SpotRow({ spot }) {
+      const [hov, setHov] = useState(false);
+      return (
+        <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+          style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: "16px", padding: "13px 0", borderBottom: "1px solid rgba(90,60,20,0.1)" }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+              <span style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "15px", fontWeight: 500, color: hov ? C.bark : C.barkMid, transition: "color 0.15s" }}>
+                {spot.name}
+              </span>
+              {spot.fav && (
+                <span style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: C.amberDim, background: "rgba(181,116,10,0.1)", border: "1px solid rgba(181,116,10,0.3)", padding: "2px 7px" }}>
+                  favourite
+                </span>
+              )}
+            </div>
+            <div style={{ fontFamily: "'Lora',Georgia,serif", fontStyle: "italic", fontSize: "13px", color: C.barkSoft, marginTop: "3px", lineHeight: "1.6" }}>
+              {spot.note}
+            </div>
+          </div>
+          <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "10px", letterSpacing: "0.1em", color: C.fog, textAlign: "right", paddingTop: "2px", whiteSpace: "nowrap" }}>
+            {spot.loc}
+          </div>
+        </div>
+      );
+    }
+
+    function PhotoSlot({ label }) {
+      return (
+        <div style={{ aspectRatio: "3/2", background: "rgba(90,64,32,0.05)", border: "1px dashed rgba(90,64,32,0.18)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "7px" }}>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={C.fog} strokeWidth="1.2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="9" cy="9" r="2"/>
+            <path d="M21 15l-5-5L5 21"/>
+          </svg>
+          {label && <span style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: C.fog }}>{label}</span>}
+        </div>
+      );
+    }
+
+    function App() {
+      const [tab, setTab] = useState("alpine");
+      const tabStyle = (id) => ({
+        fontFamily: "'DM Mono',monospace", fontSize: "11px", letterSpacing: "0.18em",
+        textTransform: "uppercase", padding: "9px 22px", border: "none",
+        borderBottom: `2px solid ${tab === id ? C.amber : "transparent"}`,
+        background: "transparent", color: tab === id ? C.amber : C.fog, transition: "all 0.15s",
+      });
+
+      return (
+        <div style={{ background: C.parchment, minHeight: "100vh" }}>
+
+          {/* MOUNTAIN HEADER */}
+          <div style={{ position: "relative", background: "linear-gradient(180deg, #c0ccd8 0%, #d4c8b0 65%, #f2ead8 100%)" }}>
+            <Mountains />
+            <div style={{ position: "absolute", bottom: 0, left: "50%", transform: "translateX(-50%)", background: C.bark, padding: "16px 44px 14px", textAlign: "center", borderTop: `3px solid ${C.amber}`, minWidth: "300px" }}>
+              <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(180deg, transparent 0px, transparent 5px, rgba(255,255,255,0.025) 5px, rgba(255,255,255,0.025) 6px)", pointerEvents: "none" }}/>
+              <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "10px", letterSpacing: "0.4em", textTransform: "uppercase", color: C.amber, marginBottom: "5px", position: "relative" }}>
+                alpine · nordic · touring
+              </div>
+              <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "clamp(42px,8vw,70px)", fontWeight: 700, fontStyle: "italic", color: C.snow, lineHeight: 1, position: "relative" }}>
+                Skiing
+              </div>
+            </div>
+          </div>
+
+          {/* BODY */}
+          <div style={{ maxWidth: "720px", margin: "0 auto", padding: "52px 32px 90px", fontFamily: "'Lora',Georgia,serif" }}>
+
+            <a href="../index.html" style={{ display: "inline-block", fontFamily: "'DM Mono',monospace", fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: C.fog, textDecoration: "none", marginBottom: "48px" }}>
+              ← back to the wall
+            </a>
+
+            {/* ORIGIN */}
+            <div style={{ marginBottom: "52px" }}>
+              <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.35em", textTransform: "uppercase", color: C.amber, marginBottom: "20px" }}>
+                how it started
+              </div>
+
+              {/* Sepidan sidebar card */}
+              <div style={{ float: "right", margin: "0 0 16px 28px", background: C.bark, padding: "18px 20px", width: "175px", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(180deg, transparent 0px, transparent 5px, rgba(255,255,255,0.025) 5px, rgba(255,255,255,0.025) 6px)", pointerEvents: "none" }}/>
+                <div style={{ fontFamily: "'Playfair Display',Georgia,serif", fontStyle: "italic", fontSize: "20px", color: C.snow, lineHeight: 1.1, marginBottom: "6px", position: "relative" }}>
+                  Sepidan
+                </div>
+                <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: C.amber, marginBottom: "10px", position: "relative" }}>
+                  Fars, Iran
+                </div>
+                <div style={{ fontFamily: "'Lora',Georgia,serif", fontStyle: "italic", fontSize: "11px", color: "rgba(250,247,240,0.58)", lineHeight: 1.7, position: "relative" }}>
+                  the little ski hill above Shiraz — where it was always snowing and I wasn't paying attention yet.
+                </div>
+              </div>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "16px", fontSize: "15px", lineHeight: "1.95", color: C.barkMid }}>
+                <p>
+                  I grew up in <em style={{ color: C.bark }}>Shiraz, Iran</em> — a warm city of poets and roses, where winter means a light jacket at most. Above the city, there is a small ski area called Sepidan. Snow falls there. I didn't think much of it.
+                </p>
+                <p>
+                  Then I moved to Canada and discovered that winter here is not decorative. It is six months long and it doesn't negotiate. For the first few years I did what made sense: I stayed inside. The cold was something that happened to other people.
+                </p>
+                <p>
+                  Learning to ski was learning to be <em style={{ color: C.bark }}>brave about the cold</em> — to go toward it instead of away. And once you do, once you're standing at the top of a ridge in the Rockies with the light coming in low and everything perfectly quiet, you realize you weren't missing winter. You were missing this.
+                </p>
+                <p>
+                  I love that everyone on a ski hill is, almost without exception, having a good time. One of the few places left where strangers smile at each other for no reason.
+                </p>
+              </div>
+              <div style={{ clear: "both" }}/>
+            </div>
+
+            <Divider />
+
+            {/* PARTNER NOTE */}
+            <div style={{ margin: "44px 0" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "14px", marginBottom: "18px" }}>
+                <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: C.amber, whiteSpace: "nowrap" }}>
+                  a note on nordic
+                </div>
+                <div style={{ flex: 1, borderBottom: "1px dashed rgba(181,116,10,0.25)" }}/>
+              </div>
+              <div style={{ background: "rgba(61,42,14,0.05)", borderLeft: `3px solid ${C.amber}`, padding: "20px 22px" }}>
+                <p style={{ fontFamily: "'Lora',Georgia,serif", fontStyle: "italic", fontSize: "14px", color: C.barkMid, lineHeight: "1.9" }}>
+                  I came to cross-country skiing through my partner, who is very good at it. I am catching up. There is something humbling and right about learning something from someone you love. Waskahegan Trail near Edmonton is our local spot — I know its hills now, which ones trick you on the descent, which long flats let you settle into a rhythm. Nordic skiing is quieter than alpine. Closer to the ground. I've come to love it differently.
+                </p>
+              </div>
+            </div>
+
+            <Divider />
+
+            {/* PLACES */}
+            <div style={{ margin: "44px 0" }}>
+              <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.35em", textTransform: "uppercase", color: C.amber, marginBottom: "20px" }}>
+                places i've skied
+              </div>
+              <div style={{ display: "flex", borderBottom: "1px solid rgba(90,60,20,0.15)", marginBottom: "4px" }}>
+                <button style={tabStyle("alpine")} onClick={() => setTab("alpine")}>Alpine</button>
+                <button style={tabStyle("nordic")} onClick={() => setTab("nordic")}>Nordic / XC</button>
+              </div>
+              <div>
+                {(tab === "alpine" ? ALPINE : NORDIC).map((s, i) => <SpotRow key={i} spot={s} />)}
+              </div>
+            </div>
+
+            <Divider />
+
+            {/* TOURING */}
+            <div style={{ margin: "44px 0" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "10px" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.amber} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polygon points="12,2 22,20 2,20"/><polyline points="8,20 12,13 15,16 17,14 20,20"/>
+                </svg>
+                <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.35em", textTransform: "uppercase", color: C.amber }}>
+                  ski touring
+                </div>
+              </div>
+              <h2 style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "28px", fontWeight: 400, fontStyle: "italic", color: C.bark, marginBottom: "14px" }}>
+                Into the mountains
+              </h2>
+              <p style={{ fontSize: "14px", lineHeight: "1.9", color: C.barkMid, maxWidth: "500px", marginBottom: "28px" }}>
+                This year I picked up touring gear. There's a different quality of silence out there — no lifts, no grooming, just the sound of your own breathing and skins on snow. I'm new to it and intend to go much further.
+              </p>
+
+              {/* Peyto card */}
+              <div style={{ background: C.bark, overflow: "hidden", position: "relative" }}>
+                <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(180deg, transparent 0px, transparent 4px, rgba(255,255,255,0.025) 4px, rgba(255,255,255,0.025) 5px)", pointerEvents: "none" }}/>
+                <div style={{ borderLeft: `4px solid ${C.amber}`, padding: "22px 24px", position: "relative" }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "10px", flexWrap: "wrap", marginBottom: "4px" }}>
+                    <span style={{ fontFamily: "'Playfair Display',Georgia,serif", fontSize: "18px", fontStyle: "italic", color: C.snow }}>
+                      Peyto Hut
+                    </span>
+                    <span style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: C.amber, border: `1px solid ${C.amberDim}`, padding: "2px 7px" }}>
+                      first tour
+                    </span>
+                  </div>
+                  <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(200,160,80,0.55)", marginBottom: "12px" }}>
+                    Wapta Icefield, AB
+                  </div>
+                  <p style={{ fontFamily: "'Lora',Georgia,serif", fontStyle: "italic", fontSize: "14px", color: "rgba(250,247,240,0.72)", lineHeight: "1.85", maxWidth: "440px" }}>
+                    My first overnight ski tour. Harder than expected, more beautiful than I was ready for. The glacier at dusk. The hut creaking in the wind. I want to go back, and then further.
+                  </p>
+                </div>
+              </div>
+              <p style={{ fontFamily: "'DM Mono',monospace", fontSize: "10px", letterSpacing: "0.12em", color: C.fog, marginTop: "18px", fontStyle: "italic" }}>
+                more huts to come — the Rockies are big and I'm just getting started.
+              </p>
+            </div>
+
+            <Divider />
+
+            {/* PHOTOS */}
+            <div style={{ margin: "44px 0" }}>
+              <div style={{ fontFamily: "'DM Mono',monospace", fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: C.fog, marginBottom: "16px" }}>
+                photos — coming soon
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "6px" }}>
+                {["Red Mtn","Wapta","Waskahegan","Fernie","Marmot","Lake Louise"].map(l => <PhotoSlot key={l} label={l} />)}
+              </div>
+            </div>
+
+            <Divider />
+
+            {/* FOOTER */}
+            <div style={{ marginTop: "40px", display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: "12px" }}>
+              <p style={{ fontFamily: "'Playfair Display',Georgia,serif", fontStyle: "italic", fontSize: "14px", color: C.barkSoft }}>
+                from Sepidan to the Wapta — it took a while, but here we are.
+              </p>
+              <a href="../index.html" style={{ fontFamily: "'DM Mono',monospace", fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: C.fog, textDecoration: "none" }}>
+                ← back to the wall
+              </a>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
