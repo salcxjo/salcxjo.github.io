@@ -115,6 +115,7 @@
     .s-wip     { color: var(--blue-stamp);  border-color: var(--blue-stamp);  font-size: 12px; transform: rotate(-8deg);  }
     .s-shipped { color: var(--green-tape);  border-color: var(--green-tape);  font-size: 12px; transform: rotate(-7deg);  }
     .s-growing { color: var(--yellow);      border-color: var(--yellow);      font-size: 12px; transform: rotate(5deg);   }
+    .s-new     { color: var(--red-stamp);   border-color: var(--red-stamp);   font-size: 12px; transform: rotate(-9deg);  }
 
     /* TAPE */
     .tape-l {
@@ -155,11 +156,14 @@
       pointer-events: none;
     }
 
-    .clip-hero { grid-column: 1 / -1; transform: rotate(0.3deg); background: var(--correction); padding: 24px 26px 22px; margin-bottom: -2px; }
+    .clip-hero  { grid-column: 1 / -1; transform: rotate(0.3deg);  background: var(--correction); padding: 24px 26px 22px; margin-bottom: -2px; }
+    .clip-hero2 { grid-column: 1 / -1; transform: rotate(-0.2deg); background: var(--paper);      padding: 22px 24px 20px; margin-bottom: -2px; margin-top: 14px; }
     .clip-a    { transform: rotate(-0.8deg); margin-top: 14px; }
     .clip-b    { transform: rotate(1.1deg);  margin-top: 14px; margin-left: -2px; }
     .clip-c    { transform: rotate(-0.5deg); margin-top: -2px; }
     .clip-d    { transform: rotate(0.7deg);  margin-top: -2px; margin-left: -2px; }
+    .clip-e    { transform: rotate(-0.6deg); margin-top: 14px; }
+    .clip-f    { transform: rotate(0.9deg);  margin-top: 14px; margin-left: -2px; }
     .clip-ghost { opacity: 0.42; background: var(--paper-dark); border-style: dashed; box-shadow: none; }
 
     /* CONTENT */
@@ -174,7 +178,8 @@
       color: var(--ink); line-height: 1.05; margin-bottom: 8px;
       position: relative; z-index: 1;
     }
-    .clip-hero .clip-title { font-size: 36px; }
+    .clip-hero .clip-title  { font-size: 36px; }
+    .clip-hero2 .clip-title { font-size: 30px; }
     .clip-desc {
       font-family: 'Special Elite', monospace; font-size: 13px;
       color: var(--ink-mid); line-height: 1.75;
@@ -233,6 +238,28 @@
     }
     .tag.out { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); }
 
+    /* METRIC STRIP */
+    .metric-strip {
+      display: flex; gap: 0; margin: 10px 0;
+      border: 1.5px solid var(--ink-mid);
+      position: relative; z-index: 1;
+      overflow: hidden;
+    }
+    .metric {
+      flex: 1; padding: 6px 8px; text-align: center;
+      border-right: 1px solid var(--ink-mid);
+      background: var(--paper-dark);
+    }
+    .metric:last-child { border-right: none; }
+    .metric-val {
+      font-family: 'VT323', monospace; font-size: 20px;
+      color: var(--ink); display: block; line-height: 1;
+    }
+    .metric-lbl {
+      font-family: 'Courier Prime', monospace; font-size: 9px;
+      color: var(--ink-mid); text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
     /* SCRAWL */
     .scrawl {
       font-family: 'Permanent Marker', cursive; font-size: 12px;
@@ -261,7 +288,8 @@
 
     @media (max-width: 620px) {
       .clippings { grid-template-columns: 1fr; }
-      .clip-b, .clip-d { margin-left: 0; }
+      .clip-b, .clip-d, .clip-f { margin-left: 0; }
+      .clip-hero2 { margin-top: 8px; }
     }
   </style>
 </head>
@@ -287,7 +315,7 @@
       <div class="tape-r"></div>
       <div class="stamp s-ongoing" style="top:16px; right:30px;">ONGOING</div>
 
-      <div class="clip-label">Featured Project &nbsp;&middot;&nbsp; 2025&ndash;present</div>
+      <div class="clip-label">Featured Project &nbsp;&middot;&nbsp; 2022&ndash;present</div>
       <div class="clip-title">HomeEdge</div>
       <div class="clip-desc">
         A home edge-ML and IoT system built from scratch on a Raspberry Pi 4 + Pico 2W.
@@ -307,12 +335,12 @@
 
       <ul class="phase-list">
         <li class="done"><span class="pn">P1</span> Pico 2W Core Node &mdash; DHT11, PIR, OLED, relay, WiFi, MQTT</li>
-        <li class="active"><span class="pn">P2</span> Pi Camera + OpenCV &mdash; motion detection, background subtraction, frame flagging</li>
-        <li><span class="pn">P3</span> TFLite Person Detection &mdash; MobileNet SSD, confidence thresholding on flagged frames</li>
-        <li><span class="pn">P4</span> Streamlit Dashboard &mdash; live feed, temp/humidity charts, event log, SQLite backend</li>
-        <li><span class="pn">P5</span> Expand Pico Node &mdash; pressure, light, tilt/tamper, buzzer, new MQTT topics</li>
-        <li><span class="pn">P6</span> Physical Control Panel &mdash; GPIO T-board, ADC, potentiometer thresholds, IR remote arming</li>
-        <li><span class="pn">P7</span> Anomaly Detection &mdash; autoencoder trained on own sensor data, pattern flagging</li>
+        <li class="done"><span class="pn">P2</span> Pi Camera + OpenCV &mdash; motion detection, background subtraction, frame flagging</li>
+        <li class="done"><span class="pn">P3</span> TFLite Person Detection &mdash; MobileNet SSD, confidence thresholding on flagged frames</li>
+        <li class="done"><span class="pn">P4</span> Streamlit Dashboard &mdash; live feed, temp/humidity charts, event log, SQLite backend</li>
+        <li class="done"><span class="pn">P5</span> Expand Pico Node &mdash; pressure, light, tilt/tamper, buzzer, new MQTT topics</li>
+        <li class="done"><span class="pn">P6</span> Physical Control Panel &mdash; GPIO T-board, ADC, potentiometer thresholds, IR remote arming</li>
+        <li class="active"><span class="pn">P7</span> Anomaly Detection &mdash; autoencoder trained on own sensor data, pattern flagging</li>
         <li><span class="pn">P8</span> Stretch &mdash; 2nd node, webhooks, servo gauge, PWM LED panel, local-only web UI</li>
       </ul>
 
@@ -329,8 +357,126 @@
       <div class="fold"></div>
     </div>
 
-    <!-- CARD A: Helios -->
+    <!-- HERO 2: Strava ML -->
+    <div class="clip clip-hero2">
+      <div class="tape-l"></div>
+      <div class="tape-r"></div>
+      <div class="stamp s-shipped" style="top:16px; right:30px;">SHIPPED</div>
+      <div class="stamp s-new" style="top:48px; right:28px; font-size:11px;">NEW</div>
+
+      <div class="clip-label">Personal Project &nbsp;&middot;&nbsp; Jan&ndash;Apr 2026 &nbsp;&middot;&nbsp; github.com/salcxjo/strava-ml</div>
+      <div class="clip-title">Strava Running ML</div>
+      <div class="clip-desc">
+        Four years of personal GPS/HR/cadence data &rarr; full ML pipeline &rarr; ONNX inference CLI.
+        Classifies workout type, predicts race times, scores training readiness, and suggests next session.
+        The whole thing runs offline from a single command.
+      </div>
+
+      <div class="metric-strip">
+        <div class="metric">
+          <span class="metric-val">0.875</span>
+          <span class="metric-lbl">macro F1</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">197</span>
+          <span class="metric-lbl">runs trained</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">4</span>
+          <span class="metric-lbl">classes</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">~200KB</span>
+          <span class="metric-lbl">ONNX model</span>
+        </div>
+        <div class="metric">
+          <span class="metric-val">4yr</span>
+          <span class="metric-lbl">data window</span>
+        </div>
+      </div>
+
+      <div class="spec-box">
+        <div class="spec-title">// system components</div>
+        <div class="spec-row"><span class="sk">classifier</span><span class="sv">XGBoost &rarr; ONNX export &rarr; onnxruntime inference</span></div>
+        <div class="spec-row"><span class="sk">features</span><span class="sv">pace CV &middot; HR zones &middot; ATL/CTL/TSB &middot; 22 total</span></div>
+        <div class="spec-row"><span class="sk">race pred.</span><span class="sv">Jack Daniels VDOT &times; CTL calibration</span></div>
+        <div class="spec-row"><span class="sk">readiness</span><span class="sv">composite score from TSB &middot; CTL &middot; ramp rate</span></div>
+        <div class="spec-row"><span class="sk">suggest</span><span class="sv">periodisation rules + VDOT pace targets</span></div>
+        <div class="spec-row"><span class="sk">eval</span><span class="sv">TimeSeriesSplit &times; 5 &mdash; no future leakage</span></div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">Python</span>
+        <span class="tag">XGBoost</span>
+        <span class="tag">ONNX</span>
+        <span class="tag">fitparse</span>
+        <span class="tag">pandas</span>
+        <span class="tag out">time-series ML</span>
+        <span class="tag out">weak supervision</span>
+      </div>
+      <div class="scrawl">&uarr; features &gt; models. every time.</div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD A: BirdWatch -->
     <div class="clip clip-a">
+      <div class="tape-l"></div>
+      <div class="stamp s-ongoing" style="top:12px; right:12px;">ONGOING</div>
+      <div class="clip-label">Personal Project &nbsp;&middot;&nbsp; Jan 2025&ndash;present</div>
+      <div class="clip-title">BirdWatch</div>
+      <div class="clip-desc">
+        Pi Camera + OpenCV + TFLite watching a balcony feeder 24/7.
+        Detects motion, extracts ROI, classifies species from 965 classes.
+        Real birds, real detections, real Edmonton weather.
+      </div>
+      <div class="spec-box">
+        <div class="spec-title">// pipeline</div>
+        <div class="spec-row"><span class="sk">detect</span><span class="sv">OpenCV MOG2 background subtraction</span></div>
+        <div class="spec-row"><span class="sk">classify</span><span class="sv">TFLite AIY Birds V1 (MobileNetV2)</span></div>
+        <div class="spec-row"><span class="sk">ui</span><span class="sv">Flask + Chart.js + SQLite</span></div>
+        <div class="spec-row"><span class="sk">alerts</span><span class="sv">Gmail &middot; species filter for Edmonton area</span></div>
+      </div>
+      <div class="tags">
+        <span class="tag">OpenCV</span>
+        <span class="tag">TFLite</span>
+        <span class="tag">Flask</span>
+        <span class="tag">SQLite</span>
+        <span class="tag out">edge-CV</span>
+      </div>
+      <div class="scrawl" style="color: var(--green-tape);">confirmed: chickadees are fast</div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD B: HomeStation -->
+    <div class="clip clip-b">
+      <div class="tape-r"></div>
+      <div class="stamp s-shipped" style="top:12px; right:12px;">SHIPPED</div>
+      <div class="clip-label">Personal Project &nbsp;&middot;&nbsp; Sep 2024&ndash;present</div>
+      <div class="clip-title">HomeStation<br><span style="font-size:18px;">(BriefMe)</span></div>
+      <div class="clip-desc">
+        Pico 2W OLED cycling weather, AQI, and Edmonton transit arrivals.
+        Pi 4 as MQTT hub. BLE page-turner for Kobo.
+        The dashboard I actually use every morning.
+      </div>
+      <div class="spec-box">
+        <div class="spec-title">// data feeds</div>
+        <div class="spec-row"><span class="sk">weather</span><span class="sv">Open-Meteo API</span></div>
+        <div class="spec-row"><span class="sk">transit</span><span class="sv">Edmonton GTFS-RT</span></div>
+        <div class="spec-row"><span class="sk">display</span><span class="sv">SH1107 OLED via SPI</span></div>
+        <div class="spec-row"><span class="sk">ble</span><span class="sv">Pico 2W &rarr; Kobo page-turner</span></div>
+      </div>
+      <div class="tags">
+        <span class="tag">MicroPython</span>
+        <span class="tag">MQTT</span>
+        <span class="tag">OLED</span>
+        <span class="tag">BLE</span>
+        <span class="tag out">IoT</span>
+      </div>
+      <div class="fold"></div>
+    </div>
+
+    <!-- CARD C: Helios -->
+    <div class="clip clip-c">
       <div class="tape-l"></div>
       <div class="stamp s-wip" style="top:12px; right:12px;">WIP</div>
       <div class="clip-label">Team Project &nbsp;&middot;&nbsp; 2025</div>
@@ -349,8 +495,8 @@
       <div class="fold"></div>
     </div>
 
-    <!-- CARD B: This website -->
-    <div class="clip clip-b">
+    <!-- CARD D: This website -->
+    <div class="clip clip-d">
       <div class="tape-r"></div>
       <div class="stamp s-growing" style="top:12px; right:12px;">GROWING</div>
       <div class="clip-label">Personal Site &nbsp;&middot;&nbsp; 2025&ndash;</div>
@@ -364,6 +510,7 @@
         <div class="spec-row"><span class="sk">index</span><span class="sv">GeoCities homepage</span></div>
         <div class="spec-row"><span class="sk">books</span><span class="sv">78-book reading list</span></div>
         <div class="spec-row"><span class="sk">poetry</span><span class="sv">Persian rug aesthetic</span></div>
+        <div class="spec-row"><span class="sk">kayaking</span><span class="sv">Clayoquot Sound &amp; Nova Scotia</span></div>
         <div class="spec-row"><span class="sk">projects</span><span class="sv">&larr; you are here</span></div>
       </div>
       <div class="tags">
@@ -374,8 +521,8 @@
       <div class="fold"></div>
     </div>
 
-    <!-- CARD C: ECE 315 -->
-    <div class="clip clip-c">
+    <!-- CARD E: ECE 315 -->
+    <div class="clip clip-e">
       <div class="tape-l"></div>
       <div class="stamp s-shipped" style="top:12px; right:10px;">SHIPPED</div>
       <div class="clip-label">ECE 315 &nbsp;&middot;&nbsp; Computer Interfacing</div>
@@ -396,13 +543,13 @@
       <div class="fold"></div>
     </div>
 
-    <!-- CARD D: Ghost -->
-    <div class="clip clip-d clip-ghost">
+    <!-- CARD F: Ghost -->
+    <div class="clip clip-f clip-ghost">
       <div class="clip-label">?? &nbsp;&middot;&nbsp; coming eventually</div>
       <div class="clip-title">Next Thing</div>
       <div class="clip-desc">
-        Haven't decided yet. Probably something physical.
-        Maybe something small and useful. The best projects always start with an itch.
+        Probably a Streamlit dashboard for the Strava ML system.
+        Or something physical. The best projects always start with an itch.
       </div>
       <div class="tags">
         <span class="tag out">TBD</span>
