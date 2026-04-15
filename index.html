@@ -10,48 +10,64 @@
     * { margin: 0; padding: 0; }
 
     body {
-      background-color: #000080;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Crect width='20' height='20' fill='%23000080'/%3E%3Ccircle cx='2' cy='2' r='1' fill='%230000aa' opacity='0.5'/%3E%3Ccircle cx='12' cy='12' r='1' fill='%230000aa' opacity='0.5'/%3E%3C/svg%3E");
+      background-color: #e8e0c8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23e8e0c8'/%3E%3Crect width='1' height='1' fill='%23d8d0b8' opacity='0.4'/%3E%3C/svg%3E");
       font-family: Verdana, Arial, sans-serif;
       font-size: 12px;
-      color: #ffffff;
+      color: #222211;
     }
 
-    a { color: #ffff00; }
-    a:visited { color: #ff99ff; }
-    a:hover { color: #00ffff; text-decoration: none; }
+    a { color: #0000cc; }
+    a:visited { color: #660099; }
+    a:hover { color: #cc3300; text-decoration: underline; }
 
-    .outer-wrap { width: 780px; margin: 8px auto; }
+    .outer-wrap { width: 780px; margin: 8px auto; background: #f5f0e0; border: 1px solid #b0a070; }
 
     /* BANNER */
     .header-banner {
-      background: linear-gradient(180deg, #440066, #220044, #000066);
-      border: 2px solid #6633aa;
-      padding: 12px 10px;
-      text-align: center;
+      background: linear-gradient(180deg, #fffbe8, #f0e8b8, #e0d488);
+      border-bottom: 2px solid #a08030;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+    .banner-left {}
     .site-title {
       font-family: Verdana, Arial, sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
-      color: #eeeeff;
-      letter-spacing: 3px;
+      color: #3a2800;
+      letter-spacing: 2px;
       text-transform: uppercase;
+      text-shadow: 1px 1px 0 #ffffff;
     }
     .site-subtitle {
       font-family: Verdana, Arial, sans-serif;
-      font-size: 11px;
-      color: #9988cc;
-      margin-top: 6px;
-      letter-spacing: 0.05em;
+      font-size: 10px;
+      color: #6a5020;
+      margin-top: 4px;
+      letter-spacing: 0.08em;
     }
+    .banner-right {
+      text-align: right;
+      font-size: 10px;
+      color: #8a7040;
+    }
+    .banner-right a {
+      color: #6a4010;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 10px;
+    }
+    .banner-right a:hover { color: #cc3300; }
 
     /* MARQUEE */
     .marquee-bar {
-      background-color: #000000;
-      border-top: 1px solid #330066;
-      border-bottom: 1px solid #330066;
-      padding: 3px 0;
+      background-color: #c8a030;
+      border-top: 1px solid #a07820;
+      border-bottom: 1px solid #a07820;
+      padding: 2px 0;
       overflow: hidden;
       white-space: nowrap;
     }
@@ -59,8 +75,9 @@
       display: inline-block;
       animation: scroll-left 30s linear infinite;
       font-size: 11px;
-      color: #7766aa;
+      color: #3a2000;
       font-family: "Courier New", monospace;
+      font-weight: bold;
     }
     @keyframes scroll-left {
       0%   { transform: translateX(800px); }
@@ -69,69 +86,78 @@
 
     /* NAV */
     .nav-bar {
-      background: #c0c0c0;
-      border: 2px outset #ffffff;
-      padding: 4px 8px;
+      background: #d4c070;
+      border-bottom: 2px solid #a08030;
+      padding: 3px 6px;
       display: flex;
-      gap: 3px;
+      gap: 2px;
       flex-wrap: wrap;
       align-items: center;
     }
-    .nav-label { font-size: 11px; color: #333333; font-weight: bold; margin-right: 4px; }
+    .nav-label { font-size: 10px; color: #4a3810; font-weight: bold; margin-right: 4px; font-family: Verdana, sans-serif; }
     .nav-btn {
-      background: linear-gradient(180deg, #e0e0e0, #a8a8a8);
-      border: 2px outset #ffffff;
+      background: linear-gradient(180deg, #ffffff, #e0d490);
+      border: 1px solid #8a7030;
+      border-bottom: 2px solid #6a5020;
       padding: 2px 10px;
       font-family: Verdana, sans-serif;
       font-size: 11px;
       font-weight: bold;
-      color: #111111;
+      color: #2a1800;
       text-decoration: none;
       display: inline-block;
     }
     .nav-btn:hover {
-      background: linear-gradient(180deg, #ffffff, #cccccc);
-      color: #000066;
-      border: 2px inset #888888;
+      background: linear-gradient(180deg, #fffff0, #f0e870);
+      color: #cc3300;
+      border-color: #cc3300;
+      text-decoration: none;
     }
-    .nav-btn:visited { color: #111111; }
+    .nav-btn:visited { color: #2a1800; }
 
     /* MAIN LAYOUT */
-    .main-layout { display: flex; gap: 5px; margin-top: 5px; }
+    .main-layout { display: flex; gap: 0; }
 
     /* SIDEBAR */
-    .sidebar { width: 178px; flex-shrink: 0; }
+    .sidebar {
+      width: 170px;
+      flex-shrink: 0;
+      background: #f0e898;
+      border-right: 2px solid #a08030;
+      padding: 6px;
+    }
+
     .sbox {
-      background-color: #00001e;
-      border: 1px solid #333366;
-      margin-bottom: 5px;
+      background-color: #fffef0;
+      border: 1px solid #b09840;
+      margin-bottom: 6px;
       padding: 6px;
     }
     .sbox-title {
-      background: #1a1a44;
-      color: #aaaadd;
+      background: linear-gradient(90deg, #c8a030, #d4b840);
+      color: #2a1800;
       font-weight: bold;
-      font-size: 11px;
-      text-align: center;
-      padding: 3px 4px;
+      font-size: 10px;
+      text-align: left;
+      padding: 2px 6px;
       margin: -6px -6px 6px -6px;
-      border-bottom: 1px solid #333366;
+      border-bottom: 1px solid #a08030;
       font-family: Verdana, sans-serif;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
-    .sbox p, .sbox li { font-size: 11px; color: #aaaacc; line-height: 1.65; }
-    .sbox ul { padding-left: 14px; }
-    .sbox a { color: #ccccff; font-size: 11px; }
-    .sbox a:visited { color: #9999cc; }
-    .sbox a:hover { color: #ffffff; }
+    .sbox p, .sbox li { font-size: 11px; color: #332200; line-height: 1.65; }
+    .sbox ul { padding-left: 12px; }
+    .sbox a { color: #0000bb; font-size: 11px; }
+    .sbox a:visited { color: #550088; }
+    .sbox a:hover { color: #cc3300; }
 
     .hit-counter {
       font-family: "Courier New", monospace;
       font-size: 18px;
-      color: #00cc00;
+      color: #cc2200;
       background: #000000;
-      border: 1px inset #333333;
+      border: 1px inset #444444;
       display: inline-block;
       padding: 2px 8px;
       letter-spacing: 4px;
@@ -141,70 +167,97 @@
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
     /* MAIN CONTENT */
-    .main-content { flex: 1; min-width: 0; }
+    .main-content { flex: 1; min-width: 0; padding: 6px; background: #faf6e8; }
+
     .cbox {
-      background-color: #00001e;
-      border: 1px solid #333366;
-      margin-bottom: 5px;
-      padding: 8px 10px;
+      background-color: #ffffff;
+      border: 1px solid #b09840;
+      margin-bottom: 6px;
+      padding: 0;
     }
     .cbox-title {
-      background: #1a1a44;
-      color: #ccccff;
+      background: linear-gradient(90deg, #d4b840, #c8a030);
+      color: #1a0e00;
       font-weight: bold;
       font-size: 11px;
       font-family: Verdana, sans-serif;
-      text-align: center;
-      padding: 3px 6px;
-      margin: -8px -10px 8px -10px;
-      border-bottom: 1px solid #333366;
-      letter-spacing: 0.1em;
+      padding: 4px 8px;
+      border-bottom: 1px solid #a08030;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+    .cbox-title .icon { font-size: 13px; }
+    .cbox-body { padding: 8px 10px; }
+
     .intro {
       font-family: Verdana, Arial, sans-serif;
       font-size: 12px;
-      color: #aaaacc;
+      color: #332200;
       line-height: 1.85;
     }
-    .intro strong { color: #ccccff; font-weight: bold; }
+    .intro strong { color: #1a0e00; }
+    .intro a { color: #0000cc; }
+
+    /* BULLET LINKS in intro */
+    .quick-links { margin: 8px 0 0 0; padding: 0; list-style: none; }
+    .quick-links li {
+      padding: 2px 0 2px 14px;
+      font-size: 11px;
+      color: #332200;
+      border-bottom: 1px dotted #d0c080;
+      position: relative;
+    }
+    .quick-links li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: #c8a030;
+      font-weight: bold;
+    }
+    .quick-links li:last-child { border-bottom: none; }
+    .quick-links a { color: #0000cc; font-weight: bold; }
+    .quick-links a:hover { color: #cc3300; }
 
     /* TILE TABLE */
     .tile-tbl {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 4px;
+      border-spacing: 3px;
     }
     .tile-tbl td {
-      background: #04041a;
-      border: 1px solid #2a2a55;
+      background: #fffef5;
+      border: 1px solid #c0a840;
       text-align: center;
-      padding: 10px 4px;
+      padding: 8px 4px;
       width: 25%;
       vertical-align: top;
-      transition: background 0.15s;
+      transition: background 0.1s;
     }
     .tile-tbl td:hover {
-      background: #080830;
-      border-color: #5555aa;
+      background: #fff8d0;
+      border-color: #cc3300;
     }
     .tile-tbl td a {
       text-decoration: none;
       color: inherit;
       display: block;
     }
-    .t-icon { font-size: 24px; display: block; margin-bottom: 5px; }
+    .t-icon { font-size: 22px; display: block; margin-bottom: 4px; }
     .t-name {
       font-family: Verdana, sans-serif;
       font-size: 11px;
       font-weight: bold;
-      color: #ccccff;
+      color: #0000cc;
       display: block;
       line-height: 1.3;
     }
+    .tile-tbl td:hover .t-name { color: #cc3300; }
     .t-desc {
       font-size: 9px;
-      color: #666699;
+      color: #887744;
       display: block;
       margin-top: 3px;
       font-family: Verdana, sans-serif;
@@ -212,46 +265,47 @@
 
     /* WIP tiles */
     .tile-tbl td.wip {
-      background: #020210;
-      border: 1px dashed #22224a;
-      opacity: 0.35;
+      background: #f0ede0;
+      border: 1px dashed #c0b080;
+      opacity: 0.5;
       cursor: not-allowed;
     }
     .tile-tbl td.wip:hover {
-      background: #020210;
-      border-color: #22224a;
+      background: #f0ede0;
+      border-color: #c0b080;
     }
-    .tile-tbl td.wip .t-name { color: #444466; }
-    .tile-tbl td.wip .t-desc { color: #333355; }
+    .tile-tbl td.wip .t-name { color: #887744; }
+    .tile-tbl td.wip:hover .t-name { color: #887744; }
     .wip-badge {
       font-size: 8px;
-      color: #333355;
+      color: #a09060;
       font-family: "Courier New", monospace;
-      letter-spacing: 0.08em;
       display: block;
-      margin-top: 5px;
+      margin-top: 4px;
       text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     /* DIVIDER */
     hr.section-rule {
       border: none;
       height: 1px;
-      background: #222244;
-      margin: 5px 0;
+      background: linear-gradient(90deg, transparent, #c0a840, transparent);
+      margin: 4px 0;
     }
 
     /* FOOTER */
     .footer {
-      background: #00001a;
-      border: 1px solid #222244;
-      padding: 8px;
+      background: linear-gradient(180deg, #e0d080, #c8b860);
+      border-top: 2px solid #a08030;
+      padding: 6px 10px;
       text-align: center;
-      margin-top: 5px;
       font-size: 10px;
-      color: #555577;
+      color: #4a3810;
       font-family: Verdana, sans-serif;
     }
+    .footer a { color: #0000bb; font-size: 10px; }
+    .footer a:hover { color: #cc3300; }
   </style>
 </head>
 <body>
@@ -260,14 +314,21 @@
 
   <!-- BANNER -->
   <div class="header-banner">
-    <div class="site-title">Salar Mirikhoozani</div>
-    <div class="site-subtitle">SWE student &nbsp;&middot;&nbsp; Edmonton, AB &nbsp;&middot;&nbsp; a gathering of fractions</div>
+    <div class="banner-left">
+      <div class="site-title">Salar Mirikhoozani</div>
+      <div class="site-subtitle">SWE student &nbsp;&middot;&nbsp; Edmonton, AB &nbsp;&middot;&nbsp; a gathering of fractions</div>
+    </div>
+    <div class="banner-right">
+      <a href="https://github.com/salcxjo" target="_blank">GitHub</a> &nbsp;&middot;&nbsp;
+      <a href="https://linkedin.com/in/salarmiri" target="_blank">LinkedIn</a><br>
+      <span style="font-size:9px; color:#8a7040; margin-top:3px; display:block;">salcxjo.github.io</span>
+    </div>
   </div>
 
   <!-- MARQUEE -->
   <div class="marquee-bar">
     <span class="marquee-inner">
-      &nbsp;&nbsp;&nbsp;&nbsp; computer nerd &nbsp;&middot;&middot; skier &nbsp;&middot;&middot; reader &nbsp;&middot;&middot; cook &nbsp;&middot;&middot; occasional poet &nbsp;&middot;&middot; cyclist &nbsp;&middot;&middot; walker &nbsp;&middot;&middot; runner &nbsp;&middot;&middot; still under construction &nbsp;&middot;&middot; always &nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp; computer nerd &nbsp;&middot;&middot; kayaker &nbsp;&middot;&middot; skier &nbsp;&middot;&middot; reader &nbsp;&middot;&middot; occasional poet &nbsp;&middot;&middot; cyclist &nbsp;&middot;&middot; walker &nbsp;&middot;&middot; runner &nbsp;&middot;&middot; always under construction &nbsp;&nbsp;&nbsp;&nbsp;
     </span>
   </div>
 
@@ -289,14 +350,14 @@
 
       <div class="sbox" id="about">
         <div class="sbox-title">About</div>
-        <p>Hi, I'm <strong style="color:#ccccff;">Salar</strong> &mdash; SWE student at the University of Alberta.</p>
+        <p>Hi, I'm <strong>Salar</strong> &mdash; Software Engineering student at the University of Alberta.</p>
         <br>
-        <p>This is my personal site. An ode to the early web and the HTML era that got me into computers in the first place.</p>
+        <p>An ode to the early web and the HTML era that first got me into computers.</p>
       </div>
 
       <div class="sbox">
         <div class="sbox-title">Visitors</div>
-        <p style="text-align:center; margin-bottom:6px; font-size:10px; color:#666688;">count:</p>
+        <p style="text-align:center; margin-bottom:5px; font-size:10px; color:#6a5020;">count:</p>
         <div style="text-align:center;">
           <span class="hit-counter">001342</span>
         </div>
@@ -304,20 +365,24 @@
 
       <div class="sbox">
         <div class="sbox-title">Status</div>
-        <p style="font-size:11px; color:#777799; line-height:1.7;">
+        <p style="font-size:11px; color:#554422; line-height:1.7;">
           &#9834; whatever feels right
         </p>
-        <p style="font-size:11px; color:#777799; margin-top:4px;">online <span class="blink" style="color:#00aa00;">&#9679;</span></p>
+        <p style="font-size:11px; color:#554422; margin-top:4px;">
+          online <span class="blink" style="color:#007700;">&#9679;</span>
+        </p>
       </div>
 
       <div class="sbox">
-        <div class="sbox-title">Links</div>
+        <div class="sbox-title">Quick Links</div>
         <ul>
           <li><a href="https://github.com/salcxjo">GitHub</a></li>
           <li><a href="https://linkedin.com/in/salarmiri">LinkedIn</a></li>
           <li><a href="./projects/">Projects</a></li>
           <li><a href="./kayaking/">Kayaking</a></li>
           <li><a href="./books/">Reading List</a></li>
+          <li><a href="./skiing/">Skiing</a></li>
+          <li><a href="./poetry/">Poetry</a></li>
         </ul>
       </div>
 
@@ -327,74 +392,88 @@
     <div class="main-content">
 
       <div class="cbox">
-        <div class="cbox-title">Who is this guy?</div>
-        <div class="intro">
-          <p>This site is a place for things I care about.</p>
-          <br>
-          <p>I never stuck to just one thing. I like learning new skills and trying different projects.</p>
-          <br>
-          <p>I write code, read a lot, and spend time outside whenever I can. Sometimes I think about poetry at strange hours.</p>
-          <br>
-          <p style="font-size:10px; color:#555577;">&#8595; explore the tiles below</p>
+        <div class="cbox-title"><span class="icon">&#128100;</span> Who is this guy?</div>
+        <div class="cbox-body">
+          <div class="intro">
+            <p>This site is a place for things I care about.</p>
+            <br>
+            <p>I never stuck to just one thing. I write code, read a lot, and spend time outside whenever I can. Sometimes I think about poetry at strange hours.</p>
+            <br>
+            <p style="font-size:10px; color:#887744;">&#8595; explore the tiles below</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cbox">
+        <div class="cbox-title"><span class="icon">&#128196;</span> Quick navigation</div>
+        <div class="cbox-body" style="padding: 4px 6px;">
+          <ul class="quick-links">
+            <li><a href="./projects/">Computer Projects</a> &mdash; IoT, edge ML, embedded systems</li>
+            <li><a href="./books/">Books</a> &mdash; 80+ titles across fiction, nature writing, Persian lit</li>
+            <li><a href="./kayaking/">Kayaking</a> &mdash; Nova Scotia &amp; Clayoquot Sound logs</li>
+            <li><a href="./skiing/">Skiing</a> &mdash; alpine, nordic, and touring in the Rockies</li>
+            <li><a href="./poetry/">Poetry</a> &mdash; bilingual Persian/English collection</li>
+            <li><a href="./movement/">Running &amp; Walking</a> &mdash; on foot, in motion</li>
+          </ul>
         </div>
       </div>
 
       <hr class="section-rule">
 
       <div class="cbox" id="tiles">
-        <div class="cbox-title">The Tiles of My Wall</div>
+        <div class="cbox-title"><span class="icon">&#127760;</span> The Tiles of My Wall</div>
+        <div class="cbox-body">
+          <table class="tile-tbl">
+            <tr>
+              <td><a href="./projects/">
+                <span class="t-icon">&#128187;</span>
+                <span class="t-name">Computer<br>Projects</span>
+                <span class="t-desc">code, builds &amp; side quests</span>
+              </a></td>
+              <td><a href="./kayaking/">
+                <span class="t-icon">&#127758;</span>
+                <span class="t-name">Kayaking</span>
+                <span class="t-desc">routes, water, silence</span>
+              </a></td>
+              <td><a href="./skiing/">
+                <span class="t-icon">&#127956;</span>
+                <span class="t-name">Skiing</span>
+                <span class="t-desc">cold mountains, good turns</span>
+              </a></td>
+              <td><a href="./poetry/">
+                <span class="t-icon">&#128214;</span>
+                <span class="t-name">Poetry</span>
+                <span class="t-desc">words for the quiet moments</span>
+              </a></td>
+            </tr>
+            <tr>
+              <td><a href="./books/">
+                <span class="t-icon">&#128218;</span>
+                <span class="t-name">Books</span>
+                <span class="t-desc">what i've read &amp; loved</span>
+              </a></td>
+              <td><a href="./movement/">
+                <span class="t-icon">&#128694;</span>
+                <span class="t-name">Running &amp;<br>Walking</span>
+                <span class="t-desc">on foot, in motion</span>
+              </a></td>
+              <td class="wip">
+                <span class="t-icon">&#127859;</span>
+                <span class="t-name">Cooking</span>
+                <span class="t-desc">recipes &amp; experiments</span>
+                <span class="wip-badge">coming soon</span>
+              </td>
+              <td class="wip">
+                <span class="t-icon">&#128693;</span>
+                <span class="t-name">Cycling</span>
+                <span class="t-desc">trails &amp; close calls</span>
+                <span class="wip-badge">coming soon</span>
+              </td>
+            </tr>
+          </table>
 
-        <table class="tile-tbl">
-          <tr>
-            <td><a href="./projects/">
-              <span class="t-icon">&#128187;</span>
-              <span class="t-name">Computer<br>Projects</span>
-              <span class="t-desc">code, builds &amp; side quests</span>
-            </a></td>
-            <td><a href="./kayaking/">
-              <span class="t-icon">&#127758;</span>
-              <span class="t-name">Kayaking</span>
-              <span class="t-desc">routes, water, silence</span>
-            </a></td>
-            <td><a href="./skiing/">
-              <span class="t-icon">&#127956;</span>
-              <span class="t-name">Skiing</span>
-              <span class="t-desc">cold mountains, good turns</span>
-            </a></td>
-            <td><a href="./poetry/">
-              <span class="t-icon">&#128214;</span>
-              <span class="t-name">Poetry</span>
-              <span class="t-desc">words for the quiet moments</span>
-            </a></td>
-          </tr>
-          <tr>
-            <td><a href="./books/">
-              <span class="t-icon">&#128218;</span>
-              <span class="t-name">Books</span>
-              <span class="t-desc">what i've read &amp; loved</span>
-            </a></td>
-            <td><a href="./movement/">
-              <span class="t-icon">&#128694;</span>
-              <span class="t-name">Running &amp;<br>Walking</span>
-              <span class="t-desc">on foot, in motion</span>
-            </a></td>
-            <td class="wip">
-              <span class="t-icon">&#127859;</span>
-              <span class="t-name">Cooking</span>
-              <span class="t-desc">recipes &amp; experiments</span>
-              <span class="wip-badge">coming soon</span>
-            </td>
-            <td class="wip">
-              <span class="t-icon">&#128693;</span>
-              <span class="t-name">Cycling</span>
-              <span class="t-desc">trails &amp; close calls</span>
-              <span class="wip-badge">coming soon</span>
-            </td>
-          </tr>
-        </table>
-
-        <p style="font-size:9px; color:#333355; text-align:right; margin-top:6px; font-family:'Courier New',monospace;">// more tiles coming</p>
-
+          <p style="font-size:9px; color:#a09060; text-align:right; margin-top:5px; font-family:'Courier New',monospace;">// more tiles coming</p>
+        </div>
       </div>
 
     </div><!-- /main-content -->
@@ -402,7 +481,9 @@
 
   <!-- FOOTER -->
   <div class="footer">
-    &copy; 2026 Salar Mirikhoozani &nbsp;&middot;&nbsp; salcxjo.github.io
+    &copy; 2026 Salar Mirikhoozani &nbsp;&middot;&nbsp;
+    <a href="https://github.com/salcxjo">salcxjo.github.io</a> &nbsp;&middot;&nbsp;
+    No tracking. No ads.
   </div>
 
 </div><!-- /outer-wrap -->
