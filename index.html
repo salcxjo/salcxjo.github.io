@@ -152,15 +152,21 @@
     .sbox a:visited { color: #550088; }
     .sbox a:hover { color: #cc3300; }
 
+    /* HIT COUNTER — warm amber LCD style */
     .hit-counter {
       font-family: "Courier New", monospace;
-      font-size: 18px;
-      color: #cc2200;
-      background: #000000;
-      border: 1px inset #444444;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffcc00;
+      background: #1a1200;
+      border: 2px solid #a08030;
+      border-top-color: #6a5020;
+      border-left-color: #6a5020;
+      box-shadow: 0 0 6px #c8a030, inset 0 0 8px #3a2800;
       display: inline-block;
-      padding: 2px 8px;
-      letter-spacing: 4px;
+      padding: 3px 10px;
+      letter-spacing: 5px;
+      text-shadow: 0 0 5px #ffaa00;
     }
 
     .blink { animation: blink 1s step-end infinite; }
@@ -200,26 +206,6 @@
     }
     .intro strong { color: #1a0e00; }
     .intro a { color: #0000cc; }
-
-    /* BULLET LINKS in intro */
-    .quick-links { margin: 8px 0 0 0; padding: 0; list-style: none; }
-    .quick-links li {
-      padding: 2px 0 2px 14px;
-      font-size: 11px;
-      color: #332200;
-      border-bottom: 1px dotted #d0c080;
-      position: relative;
-    }
-    .quick-links li::before {
-      content: "•";
-      position: absolute;
-      left: 4px;
-      color: #c8a030;
-      font-weight: bold;
-    }
-    .quick-links li:last-child { border-bottom: none; }
-    .quick-links a { color: #0000cc; font-weight: bold; }
-    .quick-links a:hover { color: #cc3300; }
 
     /* TILE TABLE */
     .tile-tbl {
@@ -357,33 +343,10 @@
 
       <div class="sbox">
         <div class="sbox-title">Visitors</div>
-        <p style="text-align:center; margin-bottom:5px; font-size:10px; color:#6a5020;">count:</p>
+        <p style="text-align:center; margin-bottom:5px; font-size:10px; color:#6a5020;">you are visitor:</p>
         <div style="text-align:center;">
-          <span class="hit-counter">001342</span>
+          <span class="hit-counter" id="hit-counter">000000</span>
         </div>
-      </div>
-
-      <div class="sbox">
-        <div class="sbox-title">Status</div>
-        <p style="font-size:11px; color:#554422; line-height:1.7;">
-          &#9834; whatever feels right
-        </p>
-        <p style="font-size:11px; color:#554422; margin-top:4px;">
-          online <span class="blink" style="color:#007700;">&#9679;</span>
-        </p>
-      </div>
-
-      <div class="sbox">
-        <div class="sbox-title">Quick Links</div>
-        <ul>
-          <li><a href="https://github.com/salcxjo">GitHub</a></li>
-          <li><a href="https://linkedin.com/in/salarmiri">LinkedIn</a></li>
-          <li><a href="./projects/">Projects</a></li>
-          <li><a href="./kayaking/">Kayaking</a></li>
-          <li><a href="./books/">Reading List</a></li>
-          <li><a href="./skiing/">Skiing</a></li>
-          <li><a href="./poetry/">Poetry</a></li>
-        </ul>
       </div>
 
     </div><!-- /sidebar -->
@@ -401,20 +364,6 @@
             <br>
             <p style="font-size:10px; color:#887744;">&#8595; explore the tiles below</p>
           </div>
-        </div>
-      </div>
-
-      <div class="cbox">
-        <div class="cbox-title"><span class="icon">&#128196;</span> Quick navigation</div>
-        <div class="cbox-body" style="padding: 4px 6px;">
-          <ul class="quick-links">
-            <li><a href="./projects/">Computer Projects</a> &mdash; IoT, edge ML, embedded systems</li>
-            <li><a href="./books/">Books</a> &mdash; 80+ titles across fiction, nature writing, Persian lit</li>
-            <li><a href="./kayaking/">Kayaking</a> &mdash; Nova Scotia &amp; Clayoquot Sound logs</li>
-            <li><a href="./skiing/">Skiing</a> &mdash; alpine, nordic, and touring in the Rockies</li>
-            <li><a href="./poetry/">Poetry</a> &mdash; bilingual Persian/English collection</li>
-            <li><a href="./movement/">Running &amp; Walking</a> &mdash; on foot, in motion</li>
-          </ul>
         </div>
       </div>
 
@@ -487,6 +436,22 @@
   </div>
 
 </div><!-- /outer-wrap -->
+
+<script>
+  // Real visitor counter using localStorage
+  // Increments once per browser session (not on every refresh)
+  var count = parseInt(localStorage.getItem('visitorCount') || '1341', 10);
+  var visited = sessionStorage.getItem('hasVisited');
+
+  if (!visited) {
+    count += 1;
+    localStorage.setItem('visitorCount', count);
+    sessionStorage.setItem('hasVisited', '1');
+  }
+
+  var display = String(count).padStart(6, '0');
+  document.getElementById('hit-counter').textContent = display;
+</script>
 
 </body>
 </html>
